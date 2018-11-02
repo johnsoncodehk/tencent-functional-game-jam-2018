@@ -16,16 +16,16 @@ public class Character : MonoBehaviour
     public float jumpHeight;
 
     /* Runtime Propertys */
-    public GameData gameData;
-    public List<Word> touchingWords;
+    GameData m_GameData;
+    List<Word> m_TouchingWords = new List<Word>();
 
     /* Getter/Setter Propertys */
     public Word otherTouchingWord
     {
         get
         {
-            touchingWords = touchingWords.FindAll(word => !!word);
-            foreach (Word word in touchingWords)
+            m_TouchingWords = m_TouchingWords.FindAll(word => !!word);
+            foreach (Word word in m_TouchingWords)
                 if (word != wordHolder.current)
                     return word;
             return null;
@@ -35,7 +35,7 @@ public class Character : MonoBehaviour
     /* Unity Events */
     void Awake()
     {
-        gameData = Resources.Load<GameData>("GameData");
+        m_GameData = Resources.Load<GameData>("GameData");
         ResetWord();
     }
     void Update()
@@ -49,13 +49,13 @@ public class Character : MonoBehaviour
     {
         Word otherWord = other.GetComponent<Word>();
         if (otherWord)
-            touchingWords.Add(otherWord);
+            m_TouchingWords.Add(otherWord);
     }
     void OnTriggerExit2D(Collider2D other)
     {
         Word otherWord = other.GetComponent<Word>();
         if (otherWord)
-            touchingWords.Remove(otherWord);
+            m_TouchingWords.Remove(otherWord);
     }
 
     /* Animation Events */
@@ -72,7 +72,7 @@ public class Character : MonoBehaviour
         Word otherWord = otherTouchingWord;
         if (otherWord)
         {
-            foreach (WordCombine wordCombine in gameData.wordCombines)
+            foreach (WordCombine wordCombine in m_GameData.wordCombines)
             {
                 List<string> remainWords = wordCombine.combineFromWords.ToList();
 

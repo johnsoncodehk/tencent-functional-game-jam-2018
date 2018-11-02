@@ -1,11 +1,15 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Assertions;
 
 public class WordHolder : MonoBehaviour
 {
 
+    /* Config Propertys */
     public Animator animator;
+
+    /* Runtime Propertys */
     public Word current;
     public Transform startParent;
 
@@ -47,7 +51,9 @@ public class WordHolder : MonoBehaviour
         if (m_WordToChange)
             return;
 
-        ChangeWord(Resources.Load<Word>("Words/" + word));
+        Word prefab = Resources.Load<Word>("Words/" + word);
+        Assert.IsNotNull(prefab, word);
+        ChangeWord(prefab);
     }
     public void ChangeWord(Word word)
     {
