@@ -746,8 +746,6 @@ MonoBehaviour:
   wordHolder: {fileID: 8551324553989429929}
   groundCheck: {fileID: 2336453217566094163}
   jumpHeight: 1.2
-  gameData: {fileID: 0}
-  touchingWords: []
 --- !u!95 &2336453218167573242
 Animator:
   serializedVersion: 3

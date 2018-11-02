@@ -44,6 +44,7 @@ public class Character : MonoBehaviour
         UpdateJump();
         UpdateGrounded();
         UpdateState();
+        UpdateSpeedY();
     }
     void OnTriggerEnter2D(Collider2D other)
     {
@@ -117,6 +118,10 @@ public class Character : MonoBehaviour
         JointMotor2D motor = footHingeJoint.motor;
         motor.motorSpeed = raw * 600;
         footHingeJoint.motor = motor;
+    }
+    void UpdateSpeedY()
+    {
+        animator.SetFloat("vy", rigidbody.velocity.y);
     }
     void UpdateGrounded()
     {
