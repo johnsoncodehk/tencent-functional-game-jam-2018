@@ -13,7 +13,55 @@ MonoBehaviour:
   m_Name: GameData
   m_EditorClassIdentifier: 
   wordCombines:
-  - word: "\u4E8C"
+  - word: "\u65E5"
     combineFromWords:
-    - "\u96F3"
-    - "\u96F3"
+    - "\u4E00"
+    - "\u65E5s"
+  - word: "\u4E08"
+    combineFromWords:
+    - "\u4E00"
+    - "\u4E08s"
+  - word: "\u4E19"
+    combineFromWords:
+    - "\u4E00"
+    - "\u4E19s"
+  - word: "\u4E1B"
+    combineFromWords:
+    - "\u4E00"
+    - "\u4E1Bs"
+  - word: "\u4E91"
+    combineFromWords:
+    - "\u4E00"
+    - "\u4E91s"
+  - word: "\u96F3"
+    combineFromWords:
+    - "\u4E00"
+    - "\u5386"
+  - word: "\u660E"
+    combineFromWords:
+    - "\u65E5"
+    - "\u6708"
+  - word: "\u672C"
+    combineFromWords:
+    - "\u4E00"
+    - "\u672Cs"
+  - word: "\u706D"
+    combineFromWords:
+    - "\u4E00"
+    - "\u706Ds"
+  - word: "\u738B"
+    combineFromWords:
+    - "\u4E00"
+    - "\u738Bs"
+  - word: "\u96E8"
+    combineFromWords:
+    - "\u4E00"
+    - "\u96E8s"
+  - word: "\u98DE"
+    combineFromWords:
+    - "\u4E00"
+    - "\u98DEs"
+  - word: "\u9C7C"
+    combineFromWords:
+    - "\u4E00"
+    - "\u9C7Cs"
