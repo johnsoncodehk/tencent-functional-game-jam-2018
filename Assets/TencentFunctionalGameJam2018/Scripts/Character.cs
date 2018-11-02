@@ -11,22 +11,22 @@ public class Character : MonoBehaviour
     new public Rigidbody2D rigidbody;
     public HingeJoint2D footHingeJoint;
     public Word startWord;
-    public Transform wordHolder;
+    public WordHolder wordHolder;
     public GroundCheck groundCheck;
     public float jumpHeight;
 
     /* Runtime Propertys */
     public GameData gameData;
     public List<Word> touchingWords;
-    public Word selfWord;
 
     /* Getter/Setter Propertys */
     public Word otherTouchingWord
     {
         get
         {
+            touchingWords = touchingWords.FindAll(word => !!word);
             foreach (Word word in touchingWords)
-                if (word != selfWord)
+                if (word != wordHolder.current)
                     return word;
             return null;
         }
@@ -44,7 +44,6 @@ public class Character : MonoBehaviour
         UpdateJump();
         UpdateGrounded();
         UpdateState();
-        UpdateSelfWord();
     }
     void OnTriggerEnter2D(Collider2D other)
     {
@@ -79,17 +78,16 @@ public class Character : MonoBehaviour
 
                 if (!remainWords.Remove(otherWord.text))
                     continue;
-                if (!remainWords.Remove(selfWord.text))
+                if (!remainWords.Remove(wordHolder.current.text))
                     continue;
 
-                Word wordToCombine = Resources.Load<Word>("Words/word_" + wordCombine.word);
-                SetWord(wordToCombine);
+                wordHolder.ChangeWord(wordCombine.word);
             }
         }
     }
     public void ResetWord()
     {
-        SetWord(startWord);
+        wordHolder.ChangeWord(startWord);
     }
 
     /* Internal */
@@ -123,22 +121,5 @@ public class Character : MonoBehaviour
     void UpdateGrounded()
     {
         animator.SetBool("Is Grounded", groundCheck.isGrounded);
-    }
-    void UpdateSelfWord()
-    {
-        if (selfWord)
-        {
-            selfWord.transform.position = wordHolder.position;
-        }
-    }
-    void SetWord(Word word)
-    {
-        if (selfWord)
-        {
-            Destroy(selfWord.gameObject);
-            selfWord = null;
-        }
-
-        selfWord = Instantiate(word);
     }
 }
