@@ -36,6 +36,7 @@ public class WordHolder : MonoBehaviour
         }
 
         current = Instantiate(m_WordToChange);
+        current.name = m_WordToChange.name;
         current.transform.SetParent(transform, false);
         m_WordToChange = null;
     }
@@ -46,7 +47,7 @@ public class WordHolder : MonoBehaviour
         if (m_WordToChange)
             return;
 
-        ChangeWord(Resources.Load<Word>("Words/word_" + word));
+        ChangeWord(Resources.Load<Word>("Words/" + word));
     }
     public void ChangeWord(Word word)
     {

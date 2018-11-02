@@ -76,9 +76,9 @@ public class Character : MonoBehaviour
             {
                 List<string> remainWords = wordCombine.combineFromWords.ToList();
 
-                if (!remainWords.Remove(otherWord.text))
+                if (!remainWords.Remove(otherWord.name))
                     continue;
-                if (!remainWords.Remove(wordHolder.current.text))
+                if (!remainWords.Remove(wordHolder.current.name))
                     continue;
 
                 wordHolder.ChangeWord(wordCombine.word);

@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1001 &280260727241132687
+--- !u!1001 &9095343349433709277
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -65,68 +65,28 @@ PrefabInstance:
     - target: {fileID: 3048625599014761991, guid: 827bd84896bd04162bd9ffe67a5e82f8,
         type: 3}
       propertyPath: m_Name
-      value: "\u4E8C"
+      value: "word_\u98DE"
+      objectReference: {fileID: 0}
+    - target: {fileID: 4124533192234246274, guid: 827bd84896bd04162bd9ffe67a5e82f8,
+        type: 3}
+      propertyPath: text
+      value: "\u98DE"
       objectReference: {fileID: 0}
     - target: {fileID: 3048625599014761988, guid: 827bd84896bd04162bd9ffe67a5e82f8,
         type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 21300014, guid: dd105a39e474c4706aba36b8be4febd9,
+      objectReference: {fileID: 21300000, guid: f68c9605b06714f9c84ffa1fa1503ff0,
         type: 3}
-    - target: {fileID: 6476895057427255207, guid: 827bd84896bd04162bd9ffe67a5e82f8,
-        type: 3}
-      propertyPath: m_SpriteTilingProperty.pivot.x
-      value: 0.50045764
-      objectReference: {fileID: 0}
-    - target: {fileID: 6476895057427255207, guid: 827bd84896bd04162bd9ffe67a5e82f8,
-        type: 3}
-      propertyPath: m_SpriteTilingProperty.pivot.y
-      value: 0.50085396
-      objectReference: {fileID: 0}
-    - target: {fileID: 6476895057427255207, guid: 827bd84896bd04162bd9ffe67a5e82f8,
-        type: 3}
-      propertyPath: m_SpriteTilingProperty.oldSize.x
-      value: 3.579957
-      objectReference: {fileID: 0}
-    - target: {fileID: 6476895057427255207, guid: 827bd84896bd04162bd9ffe67a5e82f8,
-        type: 3}
-      propertyPath: m_SpriteTilingProperty.oldSize.y
-      value: 2.882193
-      objectReference: {fileID: 0}
-    - target: {fileID: 3048625599014761989, guid: 827bd84896bd04162bd9ffe67a5e82f8,
-        type: 3}
-      propertyPath: m_LocalScale.x
-      value: 0.2
-      objectReference: {fileID: 0}
-    - target: {fileID: 3048625599014761989, guid: 827bd84896bd04162bd9ffe67a5e82f8,
-        type: 3}
-      propertyPath: m_LocalScale.y
-      value: 0.2
-      objectReference: {fileID: 0}
-    - target: {fileID: 4124533192234246274, guid: 827bd84896bd04162bd9ffe67a5e82f8,
-        type: 3}
-      propertyPath: text
-      value: "\u4E8C"
-      objectReference: {fileID: 0}
-    - target: {fileID: 2830566101891401876, guid: 827bd84896bd04162bd9ffe67a5e82f8,
-        type: 3}
-      propertyPath: m_SpriteTilingProperty.pivot.x
-      value: 0.50045764
-      objectReference: {fileID: 0}
-    - target: {fileID: 2830566101891401876, guid: 827bd84896bd04162bd9ffe67a5e82f8,
-        type: 3}
-      propertyPath: m_SpriteTilingProperty.pivot.y
-      value: 0.50085396
-      objectReference: {fileID: 0}
     - target: {fileID: 2830566101891401876, guid: 827bd84896bd04162bd9ffe67a5e82f8,
         type: 3}
       propertyPath: m_SpriteTilingProperty.oldSize.x
-      value: 3.579957
+      value: 0.44
       objectReference: {fileID: 0}
     - target: {fileID: 2830566101891401876, guid: 827bd84896bd04162bd9ffe67a5e82f8,
         type: 3}
       propertyPath: m_SpriteTilingProperty.oldSize.y
-      value: 2.882193
+      value: 0.92
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 827bd84896bd04162bd9ffe67a5e82f8, type: 3}

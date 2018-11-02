@@ -19,7 +19,7 @@ public class CharacterControlUI : MonoBehaviour
     void Update()
     {
         combineButton.interactable = !!character.otherTouchingWord;
-        dropButton.interactable = character.wordHolder.current.text != character.startWord.text;
+        dropButton.interactable = character.wordHolder.current.name != character.startWord.name;
     }
 
     /* Button Events */
