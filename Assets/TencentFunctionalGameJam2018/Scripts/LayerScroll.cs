@@ -15,7 +15,7 @@ public class LayerScroll : MonoBehaviour
         startX = transform.localPosition.x;
         startCameraX = Camera.main.transform.localPosition.x;
     }
-    void LateUpdate() {
+    void FixedUpdate() {
         float cameraX = Camera.main.transform.localPosition.x;
         float d = cameraX - startCameraX;
         d *= p;
