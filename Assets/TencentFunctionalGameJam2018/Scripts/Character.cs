@@ -88,11 +88,17 @@ public class Character : MonoBehaviour
 
                 wordHolder.ChangeWord(wordCombine.word);
             }
+            GameObject ag = GameObject.FindWithTag("AudioController");
+            AudioController ac = (AudioController)ag.GetComponent(typeof(AudioController));
+            ac.LvlUp();
         }
     }
     public void ResetWord()
     {
         wordHolder.ChangeWord(startWord);
+        GameObject ag = GameObject.FindWithTag("AudioController");
+        AudioController ac = (AudioController)ag.GetComponent(typeof(AudioController));
+        ac.LvlDown();
     }
 
     /* Internal */
