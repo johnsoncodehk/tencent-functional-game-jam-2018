@@ -43,7 +43,7 @@ public class Character : MonoBehaviour
     void Update()
     {
         UpdateHorizontal();
-        UpdateJump();
+        UpdateInputButton();
         UpdateGrounded();
         UpdateState();
         UpdateSpeedY();
@@ -100,17 +100,40 @@ public class Character : MonoBehaviour
         AudioController ac = (AudioController)ag.GetComponent(typeof(AudioController));
         ac.LvlDown();
     }
-
+ 
     /* Internal */
+    void UpdateInputButton()
+    {
+        if (Input.GetButtonDown("Fire1") && !!otherTouchingWord)
+            CombineWords();
+        if (Input.GetButtonDown("Fire2") && wordHolder.current.name != startWord.name)
+            ResetWord();
+        if (Input.GetButtonDown("Fire3"))
+        {
+            if (wordHolder.current.name == "日")
+            {
+                print("日");
+            }
+            else if (wordHolder.current.name == "灭")
+            {
+                print("灭");
+            }
+            else if (wordHolder.current.name == "飞")
+            {
+                print("飞");
+            }
+            else if (wordHolder.current.name == "雳")
+            {
+                print("雳");
+            }
+        }
+        if (Input.GetButtonDown("Jump") && groundCheck.isGrounded)
+            animator.SetTrigger("Jump");
+    }
     void UpdateHorizontal()
     {
         int raw = Mathf.RoundToInt(Input.GetAxisRaw("Horizontal"));
         animator.SetInteger("Horizontal", raw);
-    }
-    void UpdateJump()
-    {
-        if (Input.GetButtonDown("Jump") && groundCheck.isGrounded)
-            animator.SetTrigger("Jump");
     }
     void UpdateState()
     {
