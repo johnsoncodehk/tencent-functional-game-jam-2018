@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 3048625599014761988}
   - component: {fileID: 2830566101891401876}
   m_Layer: 10
-  m_Name: "word_\u4E00"
+  m_Name: "\u4E00"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -45,7 +45,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 701f7507ba97e4145bf3c2e44ff7dcf1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  text: "\u4E00"
 --- !u!212 &3048625599014761988
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -82,7 +81,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 1
+  m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: a07db9945404e4f57b1b94d9b3174494, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
