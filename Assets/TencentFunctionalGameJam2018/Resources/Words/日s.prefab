@@ -133,9 +133,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ab89d1d134a5d4e5ba4469cf07add09f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  character: {fileID: 0}
+  character: {fileID: 4762576785888251003}
   o: {fileID: 1919702527319419569}
-  lightSprite: {fileID: 3400594960813841659}
+  lightSprites:
+  - {fileID: 3400594960813841659}
 --- !u!1001 &8873734009755351266
 PrefabInstance:
   m_ObjectHideFlags: 0

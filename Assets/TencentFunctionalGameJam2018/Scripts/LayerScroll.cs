@@ -5,10 +5,10 @@ using UnityEngine;
 public class LayerScroll : MonoBehaviour
 {
 
-    [Range(0, 1)] public float p;
+    [Range(-1, 1)] public float p;
+    float startCameraX;
 
     float startX;
-    float startCameraX;
 
     void Awake()
     {

@@ -16,6 +16,7 @@ public class Character : MonoBehaviour
     public Vector2 jumpLength;
     public float maximumAeriallyMovementSpeed = 2; // 空中移動最大速度
     public float aeriallyMovementAcceleration = 1; // 空中移動加速度
+    public StageMask stageMask;
 
     /* Runtime Propertys */
     GameData m_GameData;
@@ -38,6 +39,7 @@ public class Character : MonoBehaviour
     void Awake()
     {
         m_GameData = Resources.Load<GameData>("GameData");
+        stageMask.gameObject.SetActive(true);
         ResetWord();
     }
     void Update()
@@ -100,7 +102,7 @@ public class Character : MonoBehaviour
         AudioController ac = (AudioController)ag.GetComponent(typeof(AudioController));
         ac.LvlDown();
     }
- 
+
     /* Internal */
     void UpdateInputButton()
     {
@@ -112,7 +114,7 @@ public class Character : MonoBehaviour
         {
             if (wordHolder.current.name == "日")
             {
-                print("日");
+                stageMask.PlayLight();
             }
             else if (wordHolder.current.name == "灭")
             {
