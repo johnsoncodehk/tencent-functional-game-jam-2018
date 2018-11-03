@@ -13,7 +13,9 @@ public class Character : MonoBehaviour
     public Word startWord;
     public WordHolder wordHolder;
     public GroundCheck groundCheck;
-    public float jumpHeight;
+    public Vector2 jumpLength;
+    public float maximumAeriallyMovementSpeed = 2; // 空中移動最大速度
+    public float aeriallyMovementAcceleration = 1; // 空中移動加速度
 
     /* Runtime Propertys */
     GameData m_GameData;
@@ -63,8 +65,10 @@ public class Character : MonoBehaviour
     void OnJump()
     {
         animator.Play("Falling", 0);
-        float vy = Mathf.Sqrt(-2 * Physics2D.gravity.y * Mathf.Abs(jumpHeight)) * (jumpHeight < 0 ? -1 : 1);
-        rigidbody.AddForce(new Vector2(0, vy), ForceMode2D.Impulse);
+        float vy = Mathf.Sqrt(-2 * Physics2D.gravity.y * Mathf.Abs(jumpLength.y)) * (jumpLength.y < 0 ? -1 : 1);
+        float vx = jumpLength.x * Physics2D.gravity.y / (-2 * vy) * (jumpLength.y < 0 ? -1 : 1);
+        float rawX = Input.GetAxisRaw("Horizontal");
+        rigidbody.AddForce(new Vector2(vx * rawX, vy), ForceMode2D.Impulse);
     }
 
     /* Public */
@@ -108,15 +112,26 @@ public class Character : MonoBehaviour
         if (currentState.fullPathHash == 0)
             currentState = animator.GetCurrentAnimatorStateInfo(0);
 
-        int raw = 0;
+        int moveRaw = 0;
         if (currentState.IsName("Walk"))
         {
-            raw = Mathf.RoundToInt(Input.GetAxisRaw("Horizontal"));
-            if (raw != 0)
-                transform.localScale = new Vector3(raw, 1, 1);
+            moveRaw = Mathf.RoundToInt(Input.GetAxisRaw("Horizontal"));
+            if (moveRaw != 0)
+                transform.localScale = new Vector3(moveRaw, 1, 1);
+        }
+        else if (currentState.IsName("Falling") || currentState.IsName("Falling_Down"))
+        {
+            int rawX = Mathf.RoundToInt(Input.GetAxisRaw("Horizontal"));
+            if (rawX != 0)
+            {
+                transform.localScale = new Vector3(rawX, 1, 1);
+
+                if (transform.localScale.x > 0 ? rigidbody.velocity.x < maximumAeriallyMovementSpeed : rigidbody.velocity.x > -maximumAeriallyMovementSpeed)
+                    rigidbody.velocity += new Vector2(aeriallyMovementAcceleration * Time.deltaTime * transform.localScale.x, 0);
+            }
         }
         JointMotor2D motor = footHingeJoint.motor;
-        motor.motorSpeed = raw * 600;
+        motor.motorSpeed = moveRaw * 600;
         footHingeJoint.motor = motor;
     }
     void UpdateSpeedY()
