@@ -18,6 +18,7 @@ public class Character : MonoBehaviour
     public float aeriallyMovementAcceleration = 1; // 空中移動加速度
     public StageMask stageMask;
 
+
     /* Runtime Propertys */
     GameData m_GameData;
     List<Word> m_TouchingWords = new List<Word>();
@@ -103,6 +104,17 @@ public class Character : MonoBehaviour
         ac.LvlDown();
     }
 
+
+public void UpdateFly()
+{
+
+if (transform.localScale.x > 0 ? rigidbody.velocity.x < maximumAeriallyMovementSpeed : rigidbody.velocity.x > -maximumAeriallyMovementSpeed)
+{
+rigidbody.velocity += new Vector2(aeriallyMovementAcceleration * Time.deltaTime * transform.localScale.x, 0);
+}
+
+}
+
     /* Internal */
     void UpdateInputButton()
     {
@@ -119,10 +131,14 @@ public class Character : MonoBehaviour
             else if (wordHolder.current.name == "灭")
             {
                 print("灭");
+                animator.SetTrigger("PutOutFire");
             }
             else if (wordHolder.current.name == "飞")
             {
                 print("飞");
+                animator.SetTrigger("Fly");
+                UpdateFly();
+
             }
             else if (wordHolder.current.name == "雳")
             {
