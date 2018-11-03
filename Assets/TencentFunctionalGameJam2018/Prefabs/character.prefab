@@ -749,6 +749,7 @@ MonoBehaviour:
   jumpLength: {x: 1.5, y: 1.2}
   maximumAeriallyMovementSpeed: 2
   aeriallyMovementAcceleration: 20
+  stageMasks: []
 --- !u!95 &2336453218167573242
 Animator:
   serializedVersion: 3
@@ -901,7 +902,7 @@ HingeJoint2D:
   m_BreakTorque: Infinity
   m_AutoConfigureConnectedAnchor: 1
   m_Anchor: {x: 0, y: 0}
-  m_ConnectedAnchor: {x: 0, y: 0.35000014}
+  m_ConnectedAnchor: {x: 0, y: 0.35}
   m_UseMotor: 0
   m_Motor:
     m_MotorSpeed: 0
@@ -1537,7 +1538,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2336453219432467570}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 1.5, y: 2.1, z: 0}
+  m_LocalPosition: {x: 1.5, y: 0.5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2336453218167573244}

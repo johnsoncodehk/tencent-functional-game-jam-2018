@@ -8,4 +8,8 @@ public class StageMask : MonoBehaviour
     {
         GetComponent<Animator>().Play("Light");
     }
+    public void PlayLightFinal()
+    {
+        GetComponent<Animator>().Play("Light_Final");
+    }
 }

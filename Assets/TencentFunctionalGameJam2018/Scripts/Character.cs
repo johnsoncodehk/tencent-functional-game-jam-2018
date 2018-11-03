@@ -17,11 +17,13 @@ public class Character : MonoBehaviour
     public float maximumAeriallyMovementSpeed = 2; // 空中移動最大速度
     public float aeriallyMovementAcceleration = 1; // 空中移動加速度
     public StageMask[] stageMasks;
+    public StageMask[] finalStageMasks;
 
 
     /* Runtime Propertys */
     GameData m_GameData;
     List<Word> m_TouchingWords = new List<Word>();
+    List<StageTrigger> m_EventTrigger = new List<StageTrigger>();
 
     /* Getter/Setter Propertys */
     public Word otherTouchingWord
@@ -57,12 +59,20 @@ public class Character : MonoBehaviour
         Word otherWord = other.GetComponent<Word>();
         if (otherWord)
             m_TouchingWords.Add(otherWord);
+
+        StageTrigger stageTrigger = other.GetComponent<StageTrigger>();
+        if (stageTrigger)
+            m_EventTrigger.Add(stageTrigger);
     }
     void OnTriggerExit2D(Collider2D other)
     {
         Word otherWord = other.GetComponent<Word>();
         if (otherWord)
             m_TouchingWords.Remove(otherWord);
+
+        StageTrigger stageTrigger = other.GetComponent<StageTrigger>();
+        if (stageTrigger)
+            m_EventTrigger.Remove(stageTrigger);
     }
 
     /* Animation Events */
@@ -129,6 +139,18 @@ public class Character : MonoBehaviour
             {
                 foreach (var stageMask in stageMasks)
                     stageMask.PlayLight();
+                foreach (var stageTrigger in m_EventTrigger)
+                {
+                    if (stageTrigger.isOn)
+                        continue;
+                    if (stageTrigger.id == "level_1_light")
+                    {
+                        stageTrigger.On();
+                        foreach (var stageMask in finalStageMasks)
+                            stageMask.PlayLightFinal();
+                        ResetWord();
+                    }
+                }
             }
             else if (wordHolder.current.name == "灭")
             {
