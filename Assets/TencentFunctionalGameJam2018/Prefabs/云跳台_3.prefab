@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5019489159957655376}
   - component: {fileID: 5085004891478003266}
+  - component: {fileID: 81551491682415920}
   m_Layer: 0
   m_Name: "\u4E91\u8DF3\u53F0_3"
   m_TagString: Untagged
@@ -79,3 +80,25 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!68 &81551491682415920
+EdgeCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8150180918390197799}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_EdgeRadius: 0
+  m_Points:
+  - {x: -3.935041, y: 0.7034566}
+  - {x: -1.7354555, y: 0.9018916}
+  - {x: -1.4190631, y: 0.88527286}
+  - {x: -0.9208909, y: 0.754311}
+  - {x: -0.49780154, y: 0.24015504}
+  - {x: 4.431529, y: 0.21972942}
