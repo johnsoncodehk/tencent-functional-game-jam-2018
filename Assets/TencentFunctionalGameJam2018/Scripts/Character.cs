@@ -16,7 +16,7 @@ public class Character : MonoBehaviour
     public Vector2 jumpLength;
     public float maximumAeriallyMovementSpeed = 2; // 空中移動最大速度
     public float aeriallyMovementAcceleration = 1; // 空中移動加速度
-    public StageMask stageMask;
+    public StageMask[] stageMasks;
 
 
     /* Runtime Propertys */
@@ -40,7 +40,8 @@ public class Character : MonoBehaviour
     void Awake()
     {
         m_GameData = Resources.Load<GameData>("GameData");
-        stageMask.gameObject.SetActive(true);
+        foreach (var stageMask in stageMasks)
+            stageMask.gameObject.SetActive(true);
         ResetWord();
     }
     void Update()
@@ -105,15 +106,15 @@ public class Character : MonoBehaviour
     }
 
 
-public void UpdateFly()
-{
+    public void UpdateFly()
+    {
 
-if (transform.localScale.x > 0 ? rigidbody.velocity.x < maximumAeriallyMovementSpeed : rigidbody.velocity.x > -maximumAeriallyMovementSpeed)
-{
-rigidbody.velocity += new Vector2(aeriallyMovementAcceleration * Time.deltaTime * transform.localScale.x, 0);
-}
+        if (transform.localScale.x > 0 ? rigidbody.velocity.x < maximumAeriallyMovementSpeed : rigidbody.velocity.x > -maximumAeriallyMovementSpeed)
+        {
+            rigidbody.velocity += new Vector2(aeriallyMovementAcceleration * Time.deltaTime * transform.localScale.x, 0);
+        }
 
-}
+    }
 
     /* Internal */
     void UpdateInputButton()
@@ -126,7 +127,8 @@ rigidbody.velocity += new Vector2(aeriallyMovementAcceleration * Time.deltaTime 
         {
             if (wordHolder.current.name == "日")
             {
-                stageMask.PlayLight();
+                foreach (var stageMask in stageMasks)
+                    stageMask.PlayLight();
             }
             else if (wordHolder.current.name == "灭")
             {
