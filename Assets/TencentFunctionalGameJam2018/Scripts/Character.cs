@@ -19,19 +19,18 @@ public class Character : MonoBehaviour
     public StageMask[] stageMasks;
     public StageMask[] finalStageMasks;
 
-
     /* Runtime Propertys */
     GameData m_GameData;
-    List<Word> m_TouchingWords = new List<Word>();
+    List<WordGiver> m_TouchingWords = new List<WordGiver>();
     List<StageTrigger> m_EventTrigger = new List<StageTrigger>();
 
     /* Getter/Setter Propertys */
-    public Word otherTouchingWord
+    public WordGiver touchingWordGiver
     {
         get
         {
             m_TouchingWords = m_TouchingWords.FindAll(word => !!word);
-            foreach (Word word in m_TouchingWords)
+            foreach (WordGiver word in m_TouchingWords)
                 if (word != wordHolder.current)
                     return word;
             return null;
@@ -56,7 +55,7 @@ public class Character : MonoBehaviour
     }
     void OnTriggerEnter2D(Collider2D other)
     {
-        Word otherWord = other.GetComponent<Word>();
+        WordGiver otherWord = other.GetComponent<WordGiver>();
         if (otherWord)
             m_TouchingWords.Add(otherWord);
 
@@ -66,7 +65,7 @@ public class Character : MonoBehaviour
     }
     void OnTriggerExit2D(Collider2D other)
     {
-        Word otherWord = other.GetComponent<Word>();
+        WordGiver otherWord = other.GetComponent<WordGiver>();
         if (otherWord)
             m_TouchingWords.Remove(otherWord);
 
@@ -88,23 +87,26 @@ public class Character : MonoBehaviour
     /* Public */
     public void CombineWords()
     {
-        Word otherWord = otherTouchingWord;
-        if (otherWord)
+        WordGiver wordGiver = touchingWordGiver;
+        if (wordGiver)
         {
             foreach (WordCombine wordCombine in m_GameData.wordCombines)
             {
                 List<string> remainWords = wordCombine.combineFromWords.ToList();
 
-                if (!remainWords.Remove(otherWord.name))
+                if (!remainWords.Remove(wordGiver.word))
                     continue;
                 if (!remainWords.Remove(wordHolder.current.name))
                     continue;
 
+                wordGiver.Take();
                 wordHolder.ChangeWord(wordCombine.word);
+
+                GameObject ag = GameObject.FindWithTag("AudioController");
+                AudioController ac = (AudioController)ag.GetComponent(typeof(AudioController));
+                ac.LvlUp();
+                break;
             }
-            GameObject ag = GameObject.FindWithTag("AudioController");
-            AudioController ac = (AudioController)ag.GetComponent(typeof(AudioController));
-            ac.LvlUp();
         }
     }
     public void ResetWord()
@@ -131,7 +133,7 @@ public class Character : MonoBehaviour
     {
         if (Input.GetButtonDown("Fire1"))
         {
-            if (!!otherTouchingWord)
+            if (!!touchingWordGiver)
                 CombineWords();
             if (wordHolder.current.name == "日")
             {
@@ -144,6 +146,20 @@ public class Character : MonoBehaviour
                         stageTrigger.On();
                         foreach (var stageMask in finalStageMasks)
                             stageMask.PlayLightFinal();
+                        ResetWord();
+                    }
+                }
+            }
+            else if (wordHolder.current.name == "灭")
+            {
+                foreach (var stageTrigger in m_EventTrigger)
+                {
+                    if (stageTrigger.isOn)
+                        continue;
+                    if (stageTrigger.id == "level_1_fire")
+                    {
+                        stageTrigger.On();
+                        FireWall.instance.Close();
                         ResetWord();
                     }
                 }

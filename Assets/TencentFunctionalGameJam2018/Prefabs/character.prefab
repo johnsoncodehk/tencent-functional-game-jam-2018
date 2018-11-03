@@ -742,7 +742,7 @@ MonoBehaviour:
   animator: {fileID: 2336453218167573242}
   rigidbody: {fileID: 2336453218167573245}
   footHingeJoint: {fileID: 2336453218413761116}
-  startWord: {fileID: 4124533192234246274, guid: 827bd84896bd04162bd9ffe67a5e82f8,
+  startWord: {fileID: 6200718213159408632, guid: 827bd84896bd04162bd9ffe67a5e82f8,
     type: 3}
   wordHolder: {fileID: 8551324553989429929}
   groundCheck: {fileID: 2336453217566094163}
@@ -750,6 +750,7 @@ MonoBehaviour:
   maximumAeriallyMovementSpeed: 2
   aeriallyMovementAcceleration: 20
   stageMasks: []
+  finalStageMasks: []
 --- !u!95 &2336453218167573242
 Animator:
   serializedVersion: 3
