@@ -129,9 +129,10 @@ public class Character : MonoBehaviour
     /* Internal */
     void UpdateInputButton()
     {
-        if (Input.GetButtonDown("Fire1") && !!otherTouchingWord)
+        if (Input.GetButtonDown("Fire1"))
         {
-            CombineWords();
+            if (!!otherTouchingWord)
+                CombineWords();
             if (wordHolder.current.name == "日")
             {
                 foreach (var stageTrigger in m_EventTrigger)
