@@ -130,15 +130,10 @@ public class Character : MonoBehaviour
     void UpdateInputButton()
     {
         if (Input.GetButtonDown("Fire1") && !!otherTouchingWord)
-            CombineWords();
-        if (Input.GetButtonDown("Fire2") && wordHolder.current.name != startWord.name)
-            ResetWord();
-        if (Input.GetButtonDown("Fire3"))
         {
+            CombineWords();
             if (wordHolder.current.name == "日")
             {
-                foreach (var stageMask in stageMasks)
-                    stageMask.PlayLight();
                 foreach (var stageTrigger in m_EventTrigger)
                 {
                     if (stageTrigger.isOn)
@@ -151,6 +146,16 @@ public class Character : MonoBehaviour
                         ResetWord();
                     }
                 }
+            }
+        }
+        if (Input.GetButtonDown("Fire2") && wordHolder.current.name != startWord.name)
+            ResetWord();
+        if (Input.GetButtonDown("Fire3"))
+        {
+            if (wordHolder.current.name == "日")
+            {
+                foreach (var stageMask in stageMasks)
+                    stageMask.PlayLight();
             }
             else if (wordHolder.current.name == "灭")
             {
