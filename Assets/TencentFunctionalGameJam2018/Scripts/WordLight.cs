@@ -5,7 +5,6 @@ using UnityEngine;
 public class WordLight : MonoBehaviour
 {
 
-    public Character character;
     public Transform o;
     public SpriteRenderer[] lightSprites;
 
@@ -13,7 +12,7 @@ public class WordLight : MonoBehaviour
 
     void Update()
     {
-        if (character.wordHolder.current.name == "日")
+        if (Character.instance.wordHolder.current.name == "日")
         {
             GetComponent<SpriteRenderer>().enabled = false;
 
@@ -24,7 +23,7 @@ public class WordLight : MonoBehaviour
         {
             GetComponent<SpriteRenderer>().enabled = true;
 
-            float d = Vector2.Distance(character.transform.position, o.position);
+            float d = Vector2.Distance(Character.instance.transform.position, o.position);
             float targetA = 1 - d / 3;
             float a = Mathf.SmoothDamp(lightSprites[0].color.a, targetA, ref v, 0.1f);
             foreach (var light in lightSprites)

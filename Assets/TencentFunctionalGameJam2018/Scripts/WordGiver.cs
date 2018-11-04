@@ -7,6 +7,6 @@ public class WordGiver : MonoBehaviour
     public string word;
     public void Take()
     {
-        gameObject.SendMessage("OnTakeWord");
+        gameObject.SendMessage("OnTakeWord", SendMessageOptions.DontRequireReceiver);
     }
 }

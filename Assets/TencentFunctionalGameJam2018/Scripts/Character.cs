@@ -6,6 +6,8 @@ using UnityEngine;
 public class Character : MonoBehaviour
 {
 
+    public static Character instance;
+
     /* Config Propertys */
     public Animator animator;
     new public Rigidbody2D rigidbody;
@@ -14,10 +16,13 @@ public class Character : MonoBehaviour
     public WordHolder wordHolder;
     public GroundCheck groundCheck;
     public Vector2 jumpLength;
-    public float maximumAeriallyMovementSpeed = 2; // 空中移動最大速度
-    public float aeriallyMovementAcceleration = 1; // 空中移動加速度
+    public float maximumAeriallyMovementSpeed = 2; // 空中水平移動最大速度
+    public float aeriallyMovementAcceleration = 1; // 空中水平移動加速度
+    public float flyMaxSpeed = 2;
+    public float flyAddSpeed = 1;
     public StageMask[] stageMasks;
     public StageMask[] finalStageMasks;
+    public Vector2 startPosition;
 
     /* Runtime Propertys */
     GameData m_GameData;
@@ -40,6 +45,9 @@ public class Character : MonoBehaviour
     /* Unity Events */
     void Awake()
     {
+        instance = this;
+
+        startPosition = transform.position;
         m_GameData = Resources.Load<GameData>("GameData");
         foreach (var stageMask in stageMasks)
             stageMask.gameObject.SetActive(true);
@@ -62,11 +70,26 @@ public class Character : MonoBehaviour
         StageTrigger stageTrigger = other.GetComponent<StageTrigger>();
         if (stageTrigger)
             m_EventTrigger.Add(stageTrigger);
+
+        CheckPoint checkPoint = other.GetComponent<CheckPoint>();
+        if (checkPoint)
+        {
+            checkPoint.gameObject.SetActive(false);
+            startPosition = checkPoint.transform.position;
+        }
+
+        DeadArea deadArea = other.GetComponent<DeadArea>();
+        if (deadArea)
+            CheckGameOver.instance.GameOver();
+
+        Wind wind = other.GetComponent<Wind>();
+        if (wind)
+            ResetWord();
     }
     void OnTriggerExit2D(Collider2D other)
     {
         WordGiver otherWord = other.GetComponent<WordGiver>();
-        if (otherWord)
+        if (otherWord && m_TouchingWords.Contains(otherWord))
             m_TouchingWords.Remove(otherWord);
 
         StageTrigger stageTrigger = other.GetComponent<StageTrigger>();
@@ -85,47 +108,9 @@ public class Character : MonoBehaviour
     }
 
     /* Public */
-    public void CombineWords()
+    public void Restart()
     {
-        WordGiver wordGiver = touchingWordGiver;
-        if (wordGiver)
-        {
-            foreach (WordCombine wordCombine in m_GameData.wordCombines)
-            {
-                List<string> remainWords = wordCombine.combineFromWords.ToList();
-
-                if (!remainWords.Remove(wordGiver.word))
-                    continue;
-                if (!remainWords.Remove(wordHolder.current.name))
-                    continue;
-
-                wordGiver.Take();
-                wordHolder.ChangeWord(wordCombine.word);
-
-                GameObject ag = GameObject.FindWithTag("AudioController");
-                AudioController ac = (AudioController)ag.GetComponent(typeof(AudioController));
-                ac.LvlUp();
-                break;
-            }
-        }
-    }
-    public void ResetWord()
-    {
-        wordHolder.ChangeWord(startWord);
-        GameObject ag = GameObject.FindWithTag("AudioController");
-        AudioController ac = (AudioController)ag.GetComponent(typeof(AudioController));
-        ac.LvlDown();
-    }
-
-
-    public void UpdateFly()
-    {
-
-        if (transform.localScale.x > 0 ? rigidbody.velocity.x < maximumAeriallyMovementSpeed : rigidbody.velocity.x > -maximumAeriallyMovementSpeed)
-        {
-            rigidbody.velocity += new Vector2(aeriallyMovementAcceleration * Time.deltaTime * transform.localScale.x, 0);
-        }
-
+        transform.position = startPosition;
     }
 
     /* Internal */
@@ -161,6 +146,8 @@ public class Character : MonoBehaviour
                         stageTrigger.On();
                         FireWall.instance.Close();
                         ResetWord();
+                        
+                        WindShooter.instance.StartShoot();
                     }
                 }
             }
@@ -176,23 +163,52 @@ public class Character : MonoBehaviour
             }
             else if (wordHolder.current.name == "灭")
             {
-                print("灭");
                 animator.SetTrigger("PutOutFire");
             }
             else if (wordHolder.current.name == "飞")
             {
-                print("飞");
                 animator.SetTrigger("Fly");
-                UpdateFly();
-
             }
             else if (wordHolder.current.name == "雳")
             {
-                print("雳");
             }
         }
+        animator.SetBool("Fly", Input.GetButton("Fire3") && wordHolder.current.name == "飞");
         if (Input.GetButtonDown("Jump") && groundCheck.isGrounded)
             animator.SetTrigger("Jump");
+    }
+    void CombineWords()
+    {
+        WordGiver wordGiver = touchingWordGiver;
+        if (wordGiver)
+        {
+            foreach (WordCombine wordCombine in m_GameData.wordCombines)
+            {
+                List<string> remainWords = wordCombine.combineFromWords.ToList();
+
+                if (!remainWords.Remove(wordGiver.word))
+                    continue;
+                if (!remainWords.Remove(wordHolder.current.name))
+                    continue;
+
+                m_TouchingWords.Remove(wordGiver);
+
+                wordGiver.Take();
+                wordHolder.ChangeWord(wordCombine.word);
+
+                GameObject ag = GameObject.FindWithTag("AudioController");
+                AudioController ac = (AudioController)ag.GetComponent(typeof(AudioController));
+                ac.LvlUp();
+                break;
+            }
+        }
+    }
+    void ResetWord()
+    {
+        wordHolder.ChangeWord(startWord);
+        GameObject ag = GameObject.FindWithTag("AudioController");
+        AudioController ac = (AudioController)ag.GetComponent(typeof(AudioController));
+        ac.LvlDown();
     }
     void UpdateHorizontal()
     {
@@ -212,7 +228,7 @@ public class Character : MonoBehaviour
             if (moveRaw != 0)
                 transform.localScale = new Vector3(moveRaw, 1, 1);
         }
-        else if (currentState.IsName("Falling") || currentState.IsName("Falling_Down"))
+        else if (currentState.IsName("Falling") || currentState.IsName("Falling_Down") || currentState.IsName("Fly"))
         {
             int rawX = Mathf.RoundToInt(Input.GetAxisRaw("Horizontal"));
             if (rawX != 0)
@@ -221,6 +237,12 @@ public class Character : MonoBehaviour
 
                 if (transform.localScale.x > 0 ? rigidbody.velocity.x < maximumAeriallyMovementSpeed : rigidbody.velocity.x > -maximumAeriallyMovementSpeed)
                     rigidbody.velocity += new Vector2(aeriallyMovementAcceleration * Time.deltaTime * transform.localScale.x, 0);
+            }
+
+            if (currentState.IsName("Fly"))
+            {
+                if (rigidbody.velocity.y < flyMaxSpeed)
+                    rigidbody.velocity += new Vector2(0, flyAddSpeed * Time.deltaTime);
             }
         }
         JointMotor2D motor = footHingeJoint.motor;
