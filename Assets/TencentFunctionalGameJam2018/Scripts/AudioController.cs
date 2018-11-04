@@ -32,6 +32,7 @@ public class AudioController : MonoBehaviour
 
     public int lvl = 1;
     public int lvlState = 0;
+    public float rainVolume = 0.2f;
 
     private AudioSource[] sources;
     Dictionary<string, AudioClip> clips;
@@ -176,7 +177,7 @@ public class AudioController : MonoBehaviour
                 sources[2].clip = clips["reset"];
 
             }else{
-                sources[2].clip = clips["reset2"];
+                //sources[2].clip = clips["reset2"];
 
             }
             sources[2].Play();
@@ -190,16 +191,16 @@ public class AudioController : MonoBehaviour
 
     public void PlayFx(string soundFx)
     {
-        if (!sources[3].isPlaying)
-        {
+        //if (!sources[3].isPlaying)
+        //{
             sources[3].PlayOneShot(sndFx[soundFx]);
-        }
+        //}
 
     }
 
     public void PlayRain(){
-            float FadeTime = 1.0f;
-            float startVolume = sources[4].volume;
+            float FadeTime = 2.0f;
+            float startVolume = rainVolume;
             while (sources[4].volume < startVolume)
             {
                 sources[4].volume += startVolume * Time.deltaTime / FadeTime;
@@ -209,7 +210,7 @@ public class AudioController : MonoBehaviour
 
     public void StopRain()
     {
-        float FadeTime = 0.2f;
+        float FadeTime = 2.0f;
         float startVolume = sources[4].volume;
         while (sources[4].volume > 0)
         {
