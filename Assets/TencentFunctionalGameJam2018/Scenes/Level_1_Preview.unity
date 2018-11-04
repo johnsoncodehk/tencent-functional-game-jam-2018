@@ -1437,7 +1437,7 @@ MonoBehaviour:
   StartPoint: {x: 108.01, y: 20.76, z: 0}
   EndPoint: {x: 105.09, y: 20.76, z: 0}
   IsLoop: 1
-  Speed: 0.01
+  Speed: 1
 --- !u!1 &252474123
 GameObject:
   m_ObjectHideFlags: 0
@@ -2438,7 +2438,7 @@ MonoBehaviour:
   StartPoint: {x: 102.66, y: 27.2, z: 0}
   EndPoint: {x: 99.96, y: 27.2, z: 0}
   IsLoop: 1
-  Speed: 0.02
+  Speed: 2
 --- !u!1 &467670336
 GameObject:
   m_ObjectHideFlags: 0
@@ -3133,7 +3133,7 @@ MonoBehaviour:
   StartPoint: {x: 111.22, y: 20.11, z: 0}
   EndPoint: {x: 113.63, y: 20.11, z: 0}
   IsLoop: 1
-  Speed: 0.02
+  Speed: 2
 --- !u!1 &514872466
 GameObject:
   m_ObjectHideFlags: 0
@@ -4225,7 +4225,7 @@ MonoBehaviour:
   StartPoint: {x: 104.94, y: 12.52, z: 0}
   EndPoint: {x: 107.35, y: 12.52, z: 0}
   IsLoop: 1
-  Speed: 0.01
+  Speed: 1
 --- !u!4 &679729839 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 160048387055870459, guid: 11c7e6f30d2f1455f81c31f74288acd0,
@@ -4411,7 +4411,7 @@ MonoBehaviour:
   StartPoint: {x: 100.23, y: 25.05, z: 0}
   EndPoint: {x: 102.93, y: 25.05, z: 0}
   IsLoop: 1
-  Speed: 0.02
+  Speed: 2
 --- !u!1 &728242552
 GameObject:
   m_ObjectHideFlags: 0
@@ -5339,7 +5339,7 @@ MonoBehaviour:
   StartPoint: {x: 113.28, y: 11.6, z: 0}
   EndPoint: {x: 110.03, y: 11.6, z: 0}
   IsLoop: 1
-  Speed: 0.02
+  Speed: 2
 --- !u!1 &864221762
 GameObject:
   m_ObjectHideFlags: 0
@@ -7794,7 +7794,7 @@ MonoBehaviour:
   StartPoint: {x: 104.51, y: 16.81, z: 0}
   EndPoint: {x: 108.04, y: 16.81, z: 0}
   IsLoop: 1
-  Speed: 0.02
+  Speed: 2
 --- !u!1 &1293651748
 GameObject:
   m_ObjectHideFlags: 0
@@ -9801,7 +9801,7 @@ MonoBehaviour:
   StartPoint: {x: 110.75, y: 14.82, z: 0}
   EndPoint: {x: 106.4, y: 14.82, z: 0}
   IsLoop: 1
-  Speed: 0.01
+  Speed: 1
 --- !u!1 &1635904795
 GameObject:
   m_ObjectHideFlags: 0
@@ -12459,7 +12459,7 @@ MonoBehaviour:
   StartPoint: {x: 112.29, y: 17.86, z: 0}
   EndPoint: {x: 109.06, y: 17.86, z: 0}
   IsLoop: 1
-  Speed: 0.01
+  Speed: 1
 --- !u!1 &2041184541
 GameObject:
   m_ObjectHideFlags: 0
@@ -13039,7 +13039,7 @@ MonoBehaviour:
   StartPoint: {x: 105.73, y: 23.28, z: 0}
   EndPoint: {x: 101.48, y: 23.28, z: 0}
   IsLoop: 1
-  Speed: 0.01
+  Speed: 1
 --- !u!1001 &160048386393062228
 PrefabInstance:
   m_ObjectHideFlags: 0
