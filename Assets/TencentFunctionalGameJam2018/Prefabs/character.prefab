@@ -857,7 +857,7 @@ MonoBehaviour:
     type: 3}
   wordHolder: {fileID: 8551324553989429929}
   groundCheck: {fileID: 2336453217566094163}
-  jumpLength: {x: 1.5, y: 1.2}
+  jumpLength: {x: 3, y: 1.2}
   maximumAeriallyMovementSpeed: 2
   aeriallyMovementAcceleration: 20
   flyMaxSpeed: 2.5
