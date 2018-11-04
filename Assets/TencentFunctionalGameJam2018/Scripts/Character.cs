@@ -25,7 +25,6 @@ public class Character : MonoBehaviour
     public Vector2 startPosition;
     public Animator lightEffectAnimator, combineEffectAnimator, thunderEffectAnimator;
     public Animator level1PoetryAnimator;
-    public Animator hintY, hintX;
 
     /* Runtime Propertys */
     GameData m_GameData;
@@ -78,14 +77,6 @@ public class Character : MonoBehaviour
                 foreach (var lightning in SpriteLightning.instances)
                     lightning.StartLightning();
                 stageTrigger.gameObject.SetActive(false);
-            }
-            else if (stageTrigger.id == "hint_y")
-            {
-                hintY.Play("Show");
-            }
-            else if (stageTrigger.id == "hint_x")
-            {
-                hintX.Play("Show");
             }
             else
             {
@@ -165,10 +156,7 @@ public class Character : MonoBehaviour
         if (Input.GetButtonDown("Y"))
         {
             if (!!touchingWordGiver)
-            {
                 CombineWords();
-                hintY.gameObject.SetActive(false);
-            }
             if (wordHolder.current.name == "日")
             {
                 foreach (var stageTrigger in m_EventTrigger)
@@ -218,8 +206,6 @@ public class Character : MonoBehaviour
                 GameObject ag = GameObject.FindWithTag("AudioController");
                 AudioController ac = (AudioController)ag.GetComponent(typeof(AudioController));
                 ac.PlayFx("shining");
-                hintX.gameObject.SetActive(false);
-
                 bool success = false;
                 foreach (var stageMask in stageMasks)
                     success |= stageMask.PlayLight();
@@ -277,7 +263,7 @@ public class Character : MonoBehaviour
 
                 wordGiver.Take();
                 wordHolder.ChangeWord(wordCombine.word);
-
+                Debug.Log(wordCombine.word);
                 GameObject ag = GameObject.FindWithTag("AudioController");
                 AudioController ac = (AudioController)ag.GetComponent(typeof(AudioController));
                 ac.LvlUp(wordCombine.word);
