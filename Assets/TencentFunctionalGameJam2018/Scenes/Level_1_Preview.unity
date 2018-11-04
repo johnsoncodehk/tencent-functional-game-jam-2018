@@ -1915,8 +1915,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cf4b0c108c52a9e42938b76ea812d185, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  StartPoint: {x: 104.4, y: 27.2, z: 0}
-  EndPoint: {x: 101.75, y: 27.2, z: 0}
+  StartPoint: {x: 102.66, y: 27.2, z: 0}
+  EndPoint: {x: 99.96, y: 27.2, z: 0}
   IsLoop: 1
   Speed: 0.02
 --- !u!1 &482540192
@@ -3558,8 +3558,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cf4b0c108c52a9e42938b76ea812d185, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  StartPoint: {x: 101.26, y: 25.05, z: 0}
-  EndPoint: {x: 105.59, y: 25.05, z: 0}
+  StartPoint: {x: 100.23, y: 25.05, z: 0}
+  EndPoint: {x: 102.93, y: 25.05, z: 0}
   IsLoop: 1
   Speed: 0.02
 --- !u!1 &728242552
@@ -12064,7 +12064,7 @@ PrefabInstance:
     - target: {fileID: 8657492341403867354, guid: 29335a34b5f3a45c4b36c312b4752094,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 2
+      value: 0.26
       objectReference: {fileID: 0}
     - target: {fileID: 8657492341403867354, guid: 29335a34b5f3a45c4b36c312b4752094,
         type: 3}
@@ -12080,6 +12080,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalPosition.x
       value: 2.54
+      objectReference: {fileID: 0}
+    - target: {fileID: 6054454451200629277, guid: 29335a34b5f3a45c4b36c312b4752094,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -1.31
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 29335a34b5f3a45c4b36c312b4752094, type: 3}
