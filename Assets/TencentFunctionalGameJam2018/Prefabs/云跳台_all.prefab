@@ -1,11 +1,5 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!4 &3587418773538612559 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 5679092487415486167, guid: 656db11e53fca4d4fa64f25243225552,
-    type: 3}
-  m_PrefabInstance: {fileID: 9158389633437627288}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &4116217959709583449 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5019489159957655376, guid: 0c8a60b88bdbd47b5b7bb36f91e8dfba,
@@ -117,6 +111,12 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 5679092487415486167, guid: 656db11e53fca4d4fa64f25243225552,
     type: 3}
   m_PrefabInstance: {fileID: 9104355272575197473}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &3587418773538612559 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 5679092487415486167, guid: 656db11e53fca4d4fa64f25243225552,
+    type: 3}
+  m_PrefabInstance: {fileID: 9158389633437627288}
   m_PrefabAsset: {fileID: 0}
 --- !u!4 &8110978531226623765 stripped
 Transform:
@@ -270,7 +270,7 @@ PrefabInstance:
     - target: {fileID: 5679092487415486167, guid: 656db11e53fca4d4fa64f25243225552,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 23.221
+      value: 21.96
       objectReference: {fileID: 0}
     - target: {fileID: 5679092487415486167, guid: 656db11e53fca4d4fa64f25243225552,
         type: 3}
@@ -601,6 +601,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 9212694491405454391}
     m_Modifications:
+    - target: {fileID: 4486412753430404192, guid: 656db11e53fca4d4fa64f25243225552,
+        type: 3}
+      propertyPath: m_Name
+      value: "\u4E91\u8DF3\u53F0_1 (5)"
+      objectReference: {fileID: 0}
     - target: {fileID: 5679092487415486167, guid: 656db11e53fca4d4fa64f25243225552,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -615,11 +620,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_RootOrder
       value: 15
-      objectReference: {fileID: 0}
-    - target: {fileID: 4486412753430404192, guid: 656db11e53fca4d4fa64f25243225552,
-        type: 3}
-      propertyPath: m_Name
-      value: "\u4E91\u8DF3\u53F0_1 (5)"
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 656db11e53fca4d4fa64f25243225552, type: 3}
