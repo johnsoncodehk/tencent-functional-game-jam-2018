@@ -6,7 +6,10 @@ public class StageMask : MonoBehaviour
 {
     public void PlayLight()
     {
-        GetComponent<Animator>().Play("Light");
+        var state = GetComponent<Animator>().GetCurrentAnimatorStateInfo(0);
+        if (state.IsName("Light") && state.normalizedTime < 0.3f)
+            return;
+        GetComponent<Animator>().Play("Light", 0, 0);
     }
     public void PlayLightFinal()
     {

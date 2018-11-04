@@ -104,7 +104,15 @@ public class Character : MonoBehaviour
         float vy = Mathf.Sqrt(-2 * Physics2D.gravity.y * Mathf.Abs(jumpLength.y)) * (jumpLength.y < 0 ? -1 : 1);
         float vx = jumpLength.x * Physics2D.gravity.y / (-2 * vy) * (jumpLength.y < 0 ? -1 : 1);
         float rawX = Input.GetAxisRaw("Horizontal");
-        rigidbody.AddForce(new Vector2(vx * rawX, vy), ForceMode2D.Impulse);
+        vx *= rawX;
+        rigidbody.AddForce(new Vector2(vx, vy), ForceMode2D.Impulse);
+    }
+    void OnJumpInternal()
+    {
+        animator.Play("Falling", 0);
+        float vy = Mathf.Sqrt(-2 * Physics2D.gravity.y * Mathf.Abs(jumpLength.y)) * (jumpLength.y < 0 ? -1 : 1);
+        float vx = 0;
+        rigidbody.AddForce(new Vector2(vx, vy), ForceMode2D.Impulse);
     }
 
     /* Public */
@@ -146,7 +154,7 @@ public class Character : MonoBehaviour
                         stageTrigger.On();
                         FireWall.instance.Close();
                         ResetWord();
-                        
+
                         WindShooter.instance.StartShoot();
                     }
                 }
@@ -175,7 +183,16 @@ public class Character : MonoBehaviour
         }
         animator.SetBool("Fly", Input.GetButton("X") && wordHolder.current.name == "飞");
         if (Input.GetButtonDown("A") && groundCheck.isGrounded)
-            animator.SetTrigger("Jump");
+        {
+            AnimatorStateInfo currentState = animator.GetNextAnimatorStateInfo(0);
+            if (currentState.fullPathHash == 0)
+                currentState = animator.GetCurrentAnimatorStateInfo(0);
+
+            if (currentState.IsName("Idle"))
+                animator.SetTrigger("Jump");
+            else
+                OnJumpInternal();
+        }
     }
     void CombineWords()
     {
@@ -212,8 +229,8 @@ public class Character : MonoBehaviour
     }
     void UpdateHorizontal()
     {
-        int raw = Mathf.RoundToInt(Input.GetAxisRaw("Horizontal"));
-        animator.SetInteger("Horizontal", raw);
+        float raw = Input.GetAxis("Horizontal");
+        animator.SetInteger("Horizontal", Mathf.Abs(raw) < 0.2f ? 0 : 1);
     }
     void UpdateState()
     {
@@ -221,12 +238,16 @@ public class Character : MonoBehaviour
         if (currentState.fullPathHash == 0)
             currentState = animator.GetCurrentAnimatorStateInfo(0);
 
-        int moveRaw = 0;
+        float moveSpeed = 0;
+        // float
+        animator.speed = 1;
         if (currentState.IsName("Walk"))
         {
-            moveRaw = Mathf.RoundToInt(Input.GetAxisRaw("Horizontal"));
-            if (moveRaw != 0)
-                transform.localScale = new Vector3(moveRaw, 1, 1);
+            animator.speed = Mathf.Abs(Input.GetAxis("Horizontal"));
+
+            moveSpeed = Input.GetAxis("Horizontal");
+            if (moveSpeed != 0)
+                transform.localScale = new Vector3(moveSpeed > 0 ? 1 : -1, 1, 1);
         }
         else if (currentState.IsName("Falling") || currentState.IsName("Falling_Down") || currentState.IsName("Fly"))
         {
@@ -246,7 +267,7 @@ public class Character : MonoBehaviour
             }
         }
         JointMotor2D motor = footHingeJoint.motor;
-        motor.motorSpeed = moveRaw * 600;
+        motor.motorSpeed = moveSpeed * 600;
         footHingeJoint.motor = motor;
     }
     void UpdateSpeedY()
