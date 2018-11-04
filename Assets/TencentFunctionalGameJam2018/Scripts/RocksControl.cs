@@ -55,6 +55,12 @@ public class RocksControl : MonoBehaviour
         {
             godAnimator1.Play("Flash_Final", 0, 0);
             godAnimator2.Play("Flash_Final", 0, 0);
+            StartCoroutine("WaitToGameFinish");
         }
+    }
+    IEnumerator WaitToGameFinish()
+    {
+        yield return new WaitForSeconds(5);
+        CheckGameOver.instance.GameFinish();
     }
 }

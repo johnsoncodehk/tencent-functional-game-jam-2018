@@ -6,6 +6,9 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/TencentFunctionalGameJam2018/Scenes/Level_1_Preview.unity
+    path: Assets/TencentFunctionalGameJam2018/Scenes/GameStart.unity
+    guid: 8db0e10154fee4ffdb87f9972ca89ed4
+  - enabled: 1
+    path: Assets/TencentFunctionalGameJam2018/Scenes/GamePlay.unity
     guid: 6b4eaa6ee73404db1a505a0710a9783e
   m_configObjects: {}

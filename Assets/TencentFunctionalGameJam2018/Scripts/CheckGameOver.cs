@@ -8,7 +8,7 @@ public class CheckGameOver : MonoBehaviour
     public static CheckGameOver instance;
 
     public GameObject characterDeadEffect;
-    public bool isGameOver;
+    public bool isGameOver, isGameFinish;
 
     void Awake()
     {
@@ -24,16 +24,26 @@ public class CheckGameOver : MonoBehaviour
     }
     void OnShow()
     {
-        GetComponent<Animator>().Play("Hide");
+        if (isGameOver)
+        {
+            GetComponent<Animator>().Play("Hide");
 
-        Character.instance.enabled = true;
-        Character.instance.rigidbody.bodyType = RigidbodyType2D.Dynamic;
-        Character.instance.animator.speed = 1;
-        // Character.instance.transform.localEulerAngles = new Vector3(0, 0, 0);
-        // Character.instance.transform.localScale = Vector3.one;
-        Character.instance.Restart();
+            Character.instance.enabled = true;
+            Character.instance.rigidbody.bodyType = RigidbodyType2D.Dynamic;
+            Character.instance.animator.speed = 1;
+            // Character.instance.transform.localEulerAngles = new Vector3(0, 0, 0);
+            // Character.instance.transform.localScale = Vector3.one;
+            Character.instance.Restart();
 
-        isGameOver = false;
+            isGameOver = false;
+        }
+        if (isGameFinish)
+        {
+            GameStart.gameFinish = true;
+            UnityEngine.SceneManagement.SceneManager.LoadScene("GameStart");
+
+            isGameFinish = false;
+        }
     }
 
     public void GameOver()
@@ -48,6 +58,11 @@ public class CheckGameOver : MonoBehaviour
         GetComponent<Animator>().Play("Show");
 
         // StartCoroutine(ShowEffect());
+    }
+    public void GameFinish()
+    {
+        isGameFinish = true;
+        GetComponent<Animator>().Play("Show");
     }
 
     IEnumerator ShowEffect()

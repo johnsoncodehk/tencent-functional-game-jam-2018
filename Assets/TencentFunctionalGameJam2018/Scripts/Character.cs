@@ -83,6 +83,11 @@ public class Character : MonoBehaviour
             {
                 hintY.Play("Show");
             }
+            else if (stageTrigger.id == "hint_y_hide")
+            {
+                if (hintY.GetCurrentAnimatorStateInfo(0).IsName("Show"))
+                    hintY.Play("Hide");
+            }
             else if (stageTrigger.id == "hint_x")
             {
                 hintX.Play("Show");
@@ -112,7 +117,7 @@ public class Character : MonoBehaviour
             ac.PlayFx("wind");
             ResetWord();
         }
-            
+
 
         ThunderWord thunderWord = other.GetComponent<ThunderWord>();
         if (thunderWord)
@@ -314,7 +319,10 @@ public class Character : MonoBehaviour
 
             moveSpeed = Input.GetAxis("Horizontal");
             if (moveSpeed != 0)
+            {
                 transform.localScale = new Vector3(moveSpeed > 0 ? 1 : -1, 1, 1);
+                hintY.transform.parent.localScale = transform.localScale;
+            }
         }
         else if (currentState.IsName("Falling") || currentState.IsName("Falling_Down") || currentState.IsName("Fly"))
         {
@@ -322,6 +330,7 @@ public class Character : MonoBehaviour
             if (rawX != 0)
             {
                 transform.localScale = new Vector3(rawX, 1, 1);
+                hintY.transform.parent.localScale = transform.localScale;
 
                 if (transform.localScale.x > 0 ? rigidbody.velocity.x < maximumAeriallyMovementSpeed : rigidbody.velocity.x > -maximumAeriallyMovementSpeed)
                     rigidbody.velocity += new Vector2(aeriallyMovementAcceleration * Time.deltaTime * transform.localScale.x, 0);
