@@ -69,7 +69,17 @@ public class Character : MonoBehaviour
 
         StageTrigger stageTrigger = other.GetComponent<StageTrigger>();
         if (stageTrigger)
-            m_EventTrigger.Add(stageTrigger);
+        {
+            if (stageTrigger.id == "level_3_enter")
+            {
+                SpriteLightning.instance.StartLightning();
+                stageTrigger.gameObject.SetActive(false);
+            }
+            else
+            {
+                m_EventTrigger.Add(stageTrigger);
+            }
+        }
 
         CheckPoint checkPoint = other.GetComponent<CheckPoint>();
         if (checkPoint)

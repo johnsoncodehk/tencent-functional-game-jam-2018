@@ -4,6 +4,17 @@ using UnityEngine;
 
 public class SpriteLightning : MonoBehaviour
 {
+
+    public static SpriteLightning instance;
+
+    void Awake()
+    {
+        instance = this;
+        
+        SpriteRenderer sprite = GetComponent<SpriteRenderer>();
+        sprite.enabled = false;
+    }
+
     public void StartLightning()
     {
         StartCoroutine(StartLightningCoroutine());

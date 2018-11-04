@@ -12,6 +12,17 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 6550202418318350130}
   m_PrefabAsset: {fileID: 0}
+--- !u!210 &5474112434248444447
+SortingGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4726755428415671775}
+  m_Enabled: 1
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: -2
 --- !u!1 &6685693045309422482
 GameObject:
   m_ObjectHideFlags: 0
