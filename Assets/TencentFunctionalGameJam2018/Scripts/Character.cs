@@ -116,7 +116,7 @@ public class Character : MonoBehaviour
     /* Internal */
     void UpdateInputButton()
     {
-        if (Input.GetButtonDown("Fire1"))
+        if (Input.GetButtonDown("Y"))
         {
             if (!!touchingWordGiver)
                 CombineWords();
@@ -152,9 +152,9 @@ public class Character : MonoBehaviour
                 }
             }
         }
-        if (Input.GetButtonDown("Fire2") && wordHolder.current.name != startWord.name)
+        if (Input.GetButtonDown("B") && wordHolder.current.name != startWord.name)
             ResetWord();
-        if (Input.GetButtonDown("Fire3"))
+        if (Input.GetButtonDown("X"))
         {
             if (wordHolder.current.name == "日")
             {
@@ -173,8 +173,8 @@ public class Character : MonoBehaviour
             {
             }
         }
-        animator.SetBool("Fly", Input.GetButton("Fire3") && wordHolder.current.name == "飞");
-        if (Input.GetButtonDown("Jump") && groundCheck.isGrounded)
+        animator.SetBool("Fly", Input.GetButton("X") && wordHolder.current.name == "飞");
+        if (Input.GetButtonDown("A") && groundCheck.isGrounded)
             animator.SetTrigger("Jump");
     }
     void CombineWords()
