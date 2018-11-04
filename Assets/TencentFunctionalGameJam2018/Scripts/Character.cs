@@ -23,6 +23,7 @@ public class Character : MonoBehaviour
     public StageMask[] stageMasks;
     public StageMask[] finalStageMasks;
     public Vector2 startPosition;
+    public Animator lightEffectAnimator, combineEffectAnimator, thunderEffectAnimator;
 
     /* Runtime Propertys */
     GameData m_GameData;
@@ -186,8 +187,11 @@ public class Character : MonoBehaviour
         {
             if (wordHolder.current.name == "日")
             {
+                bool success = false;
                 foreach (var stageMask in stageMasks)
-                    stageMask.PlayLight();
+                    success |= stageMask.PlayLight();
+                if (success)
+                    lightEffectAnimator.Play("Flash", 0, 0);
             }
             else if (wordHolder.current.name == "灭")
             {
@@ -200,6 +204,7 @@ public class Character : MonoBehaviour
             else if (wordHolder.current.name == "雳")
             {
                 RocksControl.instance.DestroyRock();
+                thunderEffectAnimator.Play("Flash", 0, 0);
             }
         }
         animator.SetBool("Fly", Input.GetButton("X") && wordHolder.current.name == "飞");
@@ -237,6 +242,8 @@ public class Character : MonoBehaviour
                 GameObject ag = GameObject.FindWithTag("AudioController");
                 AudioController ac = (AudioController)ag.GetComponent(typeof(AudioController));
                 ac.LvlUp();
+
+                combineEffectAnimator.Play("Flash", 0, 0);
                 break;
             }
         }
