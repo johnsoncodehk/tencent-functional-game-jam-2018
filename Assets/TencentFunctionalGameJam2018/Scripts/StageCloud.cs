@@ -19,11 +19,17 @@ public class StageCloud : MonoBehaviour
     }
     public void RainStart()
     {
+        GameObject ag = GameObject.FindWithTag("AudioController");
+        AudioController ac = (AudioController)ag.GetComponent(typeof(AudioController));
+        ac.PlayRain();
         foreach (var effect in rain.GetComponentsInChildren<ParticleSystem>())
             effect.Play();
     }
     public void RainEnd()
     {
+        GameObject ag = GameObject.FindWithTag("AudioController");
+        AudioController ac = (AudioController)ag.GetComponent(typeof(AudioController));
+        ac.StopRain();
         foreach (var effect in rain.GetComponentsInChildren<ParticleSystem>())
             effect.Stop();
     }

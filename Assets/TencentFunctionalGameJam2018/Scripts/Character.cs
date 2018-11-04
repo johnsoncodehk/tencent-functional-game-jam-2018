@@ -97,7 +97,13 @@ public class Character : MonoBehaviour
 
         Wind wind = other.GetComponent<Wind>();
         if (wind)
+        {
+            GameObject ag = GameObject.FindWithTag("AudioController");
+            AudioController ac = (AudioController)ag.GetComponent(typeof(AudioController));
+            ac.PlayFx("wind");
             ResetWord();
+        }
+            
 
         ThunderWord thunderWord = other.GetComponent<ThunderWord>();
         if (thunderWord)
@@ -176,12 +182,17 @@ public class Character : MonoBehaviour
                         continue;
                     if (stageTrigger.id == "level_1_fire")
                     {
+                        GameObject ag = GameObject.FindWithTag("AudioController");
+                        AudioController ac = (AudioController)ag.GetComponent(typeof(AudioController));
+                        ac.PutOutFire();
                         stageTrigger.On();
                         FireWall.instance.Close();
                         ResetWord();
 
                         level1PoetryAnimator.SetInteger("State", level1PoetryAnimator.GetInteger("State") + 1);
                         WindShooter.instance.StartShoot();
+
+
                     }
                 }
             }
@@ -192,6 +203,9 @@ public class Character : MonoBehaviour
         {
             if (wordHolder.current.name == "日")
             {
+                GameObject ag = GameObject.FindWithTag("AudioController");
+                AudioController ac = (AudioController)ag.GetComponent(typeof(AudioController));
+                ac.PlayFx("shining");
                 bool success = false;
                 foreach (var stageMask in stageMasks)
                     success |= stageMask.PlayLight();
@@ -204,10 +218,16 @@ public class Character : MonoBehaviour
             }
             else if (wordHolder.current.name == "飞")
             {
+                GameObject ag = GameObject.FindWithTag("AudioController");
+                AudioController ac = (AudioController)ag.GetComponent(typeof(AudioController));
+                ac.PlayFx("bird");
                 animator.SetTrigger("Fly");
             }
             else if (wordHolder.current.name == "雳")
             {
+                GameObject ag = GameObject.FindWithTag("AudioController");
+                AudioController ac = (AudioController)ag.GetComponent(typeof(AudioController));
+                ac.PlayFx("thunder");
                 RocksControl.instance.DestroyRock();
                 thunderEffectAnimator.Play("Flash", 0, 0);
             }
@@ -243,10 +263,10 @@ public class Character : MonoBehaviour
 
                 wordGiver.Take();
                 wordHolder.ChangeWord(wordCombine.word);
-
+                Debug.Log(wordCombine.word);
                 GameObject ag = GameObject.FindWithTag("AudioController");
                 AudioController ac = (AudioController)ag.GetComponent(typeof(AudioController));
-                ac.LvlUp();
+                ac.LvlUp(wordCombine.word);
 
                 combineEffectAnimator.Play("Flash", 0, 0);
                 break;
