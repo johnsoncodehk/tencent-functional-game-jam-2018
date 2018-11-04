@@ -85,6 +85,16 @@ public class Character : MonoBehaviour
         Wind wind = other.GetComponent<Wind>();
         if (wind)
             ResetWord();
+
+        ThunderWord thunderWord = other.GetComponent<ThunderWord>();
+        if (thunderWord)
+        {
+            if (wordHolder.current.name != "雨" && wordHolder.current.name != "雳")
+            {
+                thunderWord.Protect();
+                CheckGameOver.instance.GameOver();
+            }
+        }
     }
     void OnTriggerExit2D(Collider2D other)
     {
@@ -179,6 +189,7 @@ public class Character : MonoBehaviour
             }
             else if (wordHolder.current.name == "雳")
             {
+                RocksControl.instance.DestroyRock();
             }
         }
         animator.SetBool("Fly", Input.GetButton("X") && wordHolder.current.name == "飞");
