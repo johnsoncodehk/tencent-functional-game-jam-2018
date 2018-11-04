@@ -35,3 +35,5 @@ sysinfo.txt
 # Builds
 *.apk
 *.unitypackage
+
+Assets/TencentFunctionalGameJam2018/\.DS_Store
