@@ -14,10 +14,21 @@ public class AudioController : MonoBehaviour
     public AudioClip state2;
     public AudioClip state3;
     public AudioClip state4;
+    public AudioClip state5;
+    public AudioClip state6;
+    public AudioClip state7;
+    public AudioClip state8;
+
+
     public AudioClip transformUp;
     public AudioClip transformDown;
     public AudioClip shining;
     public AudioClip extinguish;
+    public AudioClip bird;
+    public AudioClip thunder;
+    public AudioClip rain;
+    public AudioClip neon;
+
     public int lvl = 1;
     public int lvlState = 0;
 
