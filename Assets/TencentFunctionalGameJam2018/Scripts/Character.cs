@@ -24,6 +24,7 @@ public class Character : MonoBehaviour
     public StageMask[] finalStageMasks;
     public Vector2 startPosition;
     public Animator lightEffectAnimator, combineEffectAnimator, thunderEffectAnimator;
+    public Animator level1PoetryAnimator;
 
     /* Runtime Propertys */
     GameData m_GameData;
@@ -73,7 +74,8 @@ public class Character : MonoBehaviour
         {
             if (stageTrigger.id == "level_3_enter")
             {
-                SpriteLightning.instance.StartLightning();
+                foreach (var lightning in SpriteLightning.instances)
+                    lightning.StartLightning();
                 stageTrigger.gameObject.SetActive(false);
             }
             else
@@ -161,6 +163,8 @@ public class Character : MonoBehaviour
                         foreach (var stageMask in finalStageMasks)
                             stageMask.PlayLightFinal();
                         ResetWord();
+
+                        level1PoetryAnimator.SetInteger("State", level1PoetryAnimator.GetInteger("State") + 1);
                     }
                 }
             }
@@ -176,6 +180,7 @@ public class Character : MonoBehaviour
                         FireWall.instance.Close();
                         ResetWord();
 
+                        level1PoetryAnimator.SetInteger("State", level1PoetryAnimator.GetInteger("State") + 1);
                         WindShooter.instance.StartShoot();
                     }
                 }
