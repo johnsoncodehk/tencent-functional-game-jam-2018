@@ -9,7 +9,7 @@ public class RocksControl : MonoBehaviour
     public List<GameObject> rocks;
     public List<GameObject> destroyEffects;
     public Animator godAnimator1, godAnimator2;
-    public Animator thunderAnimator;
+    public Animator[] thunderAnimators;
 
     void Awake()
     {
@@ -28,9 +28,15 @@ public class RocksControl : MonoBehaviour
         destroyEffects.RemoveAt(destroyEffects.Count - 1);
         effect.SetActive(true);
 
-        thunderAnimator.gameObject.SetActive(true);
-        thunderAnimator.transform.position = effect.transform.position;
-        thunderAnimator.Play("Flash", 0, 0);
+        int i = 0;
+        foreach (var thunderAnimator in thunderAnimators)
+        {
+            thunderAnimator.gameObject.SetActive(true);
+            thunderAnimator.Play("Flash", 0, 0);
+            if (i == 0)
+                thunderAnimator.transform.position = effect.transform.position;
+            i++;
+        }
 
         if (rocks.Count == 3)
         {
