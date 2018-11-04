@@ -62,6 +62,7 @@ public class CheckGameOver : MonoBehaviour
     public void GameFinish()
     {
         isGameFinish = true;
+        transform.parent.SetParent(null);
         GetComponent<Animator>().Play("Show");
     }
 
