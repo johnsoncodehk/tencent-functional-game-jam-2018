@@ -152,23 +152,27 @@ PolygonCollider2D:
       - {x: 2.115, y: 0.17999999}
       - {x: 1.875, y: 0.32999998}
       - {x: 1.7149999, y: 0.32}
-      - {x: 1.665, y: 0.38}
-      - {x: 1.435, y: 0.48999998}
-      - {x: 1.0849999, y: 0.48999998}
-      - {x: 0.79499996, y: 0.51}
-      - {x: 0.555, y: 0.44}
-      - {x: 0.355, y: 0.52}
-      - {x: 0.125, y: 0.52}
-      - {x: -0.024999999, y: 0.5}
-      - {x: -0.095, y: 0.52}
-      - {x: -0.285, y: 0.51}
-      - {x: -0.515, y: 0.48999998}
-      - {x: -0.695, y: 0.5}
-      - {x: -0.875, y: 0.47}
-      - {x: -0.955, y: 0.48999998}
-      - {x: -1.145, y: 0.48}
-      - {x: -1.385, y: 0.37}
-      - {x: -1.555, y: 0.32999998}
+      - {x: 1.5879593, y: 0.30295753}
+      - {x: 1.3868332, y: 0.2877617}
+      - {x: 1.1235199, y: 0.3359127}
+      - {x: 0.8675232, y: 0.33606339}
+      - {x: 0.756073, y: 0.3529358}
+      - {x: 0.5935211, y: 0.39184952}
+      - {x: 0.43775177, y: 0.3689251}
+      - {x: 0.07684326, y: 0.3755436}
+      - {x: -0.06707001, y: 0.38037872}
+      - {x: -0.17736816, y: 0.3831482}
+      - {x: -0.3047638, y: 0.36326218}
+      - {x: -0.4467163, y: 0.34692955}
+      - {x: -0.58444214, y: 0.35466385}
+      - {x: -0.7527771, y: 0.37480164}
+      - {x: -0.88842773, y: 0.34252357}
+      - {x: -0.9897232, y: 0.32780075}
+      - {x: -1.1109467, y: 0.31355858}
+      - {x: -1.2220383, y: 0.30665016}
+      - {x: -1.3946381, y: 0.273695}
+      - {x: -1.487587, y: 0.2529564}
+      - {x: -1.5684052, y: 0.22565079}
       - {x: -1.655, y: 0.26999998}
       - {x: -1.785, y: 0.19999999}
       - {x: -1.915, y: 0.08}
@@ -332,63 +336,13 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1981075182329567980, guid: c971738d9f3c8c542a86ea3c209b8b0e,
         type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1981075182329567980, guid: c971738d9f3c8c542a86ea3c209b8b0e,
-        type: 3}
       propertyPath: m_LocalPosition.y
       value: -0.73
       objectReference: {fileID: 0}
     - target: {fileID: 1981075182329567980, guid: c971738d9f3c8c542a86ea3c209b8b0e,
         type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1981075182329567980, guid: c971738d9f3c8c542a86ea3c209b8b0e,
-        type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1981075182329567980, guid: c971738d9f3c8c542a86ea3c209b8b0e,
-        type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1981075182329567980, guid: c971738d9f3c8c542a86ea3c209b8b0e,
-        type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1981075182329567980, guid: c971738d9f3c8c542a86ea3c209b8b0e,
-        type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1981075182329567980, guid: c971738d9f3c8c542a86ea3c209b8b0e,
-        type: 3}
       propertyPath: m_RootOrder
       value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1981075182329567980, guid: c971738d9f3c8c542a86ea3c209b8b0e,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1981075182329567980, guid: c971738d9f3c8c542a86ea3c209b8b0e,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1981075182329567980, guid: c971738d9f3c8c542a86ea3c209b8b0e,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1981075182329567981, guid: c971738d9f3c8c542a86ea3c209b8b0e,
-        type: 3}
-      propertyPath: m_Name
-      value: RainDropAll
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c971738d9f3c8c542a86ea3c209b8b0e, type: 3}
