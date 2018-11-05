@@ -28,6 +28,7 @@ public class Character : MonoBehaviour
     public Animator hintY, hintX;
 
     /* Runtime Propertys */
+    bool m_IsUseX;
     GameData m_GameData;
     List<WordGiver> m_TouchingWords = new List<WordGiver>();
     List<StageTrigger> m_EventTrigger = new List<StageTrigger>();
@@ -81,16 +82,13 @@ public class Character : MonoBehaviour
             }
             else if (stageTrigger.id == "hint_y")
             {
-                hintY.Play("Show");
-            }
-            else if (stageTrigger.id == "hint_y_hide")
-            {
-                if (hintY.GetCurrentAnimatorStateInfo(0).IsName("Show"))
-                    hintY.Play("Hide");
+                if (wordHolder.current.name == "一")
+                    hintY.Play("Show");
             }
             else if (stageTrigger.id == "hint_x")
             {
-                hintX.Play("Show");
+                if (!m_IsUseX && wordHolder.current.name == "日")
+                    hintX.Play("Show");
             }
             else
             {
@@ -137,7 +135,22 @@ public class Character : MonoBehaviour
 
         StageTrigger stageTrigger = other.GetComponent<StageTrigger>();
         if (stageTrigger)
-            m_EventTrigger.Remove(stageTrigger);
+        {
+            if (stageTrigger.id == "hint_y")
+            {
+                if (hintY.GetCurrentAnimatorStateInfo(0).IsName("Show"))
+                    hintY.Play("Hide");
+            }
+            if (stageTrigger.id == "hint_x")
+            {
+                if (hintX.GetCurrentAnimatorStateInfo(0).IsName("Show"))
+                    hintX.Play("Hide");
+            }
+            else
+            {
+                m_EventTrigger.Remove(stageTrigger);
+            }
+        }
     }
 
     /* Animation Events */
@@ -172,7 +185,8 @@ public class Character : MonoBehaviour
             if (!!touchingWordGiver)
             {
                 CombineWords();
-                hintY.gameObject.SetActive(false);
+                if (hintY.GetCurrentAnimatorStateInfo(0).IsName("Show"))
+                    hintY.Play("Hide");
             }
             if (wordHolder.current.name == "日")
             {
@@ -223,7 +237,9 @@ public class Character : MonoBehaviour
                 GameObject ag = GameObject.FindWithTag("AudioController");
                 AudioController ac = (AudioController)ag.GetComponent(typeof(AudioController));
                 ac.PlayFx("shining");
-                hintX.gameObject.SetActive(false);
+                m_IsUseX = true;
+                if (hintX.GetCurrentAnimatorStateInfo(0).IsName("Show"))
+                    hintX.Play("Hide");
 
                 bool success = false;
                 foreach (var stageMask in stageMasks)
