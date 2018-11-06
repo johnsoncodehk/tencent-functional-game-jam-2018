@@ -22,6 +22,7 @@ public class Character : MonoBehaviour
     public float flyAddSpeed = 1;
     public StageMask[] stageMasks;
     public StageMask[] finalStageMasks;
+    public SpriteLightning[] spriteLightnings;
     public Vector2 startPosition;
     public Animator lightEffectAnimator, combineEffectAnimator, thunderEffectAnimator;
     public Animator level1PoetryAnimator;
@@ -76,7 +77,7 @@ public class Character : MonoBehaviour
         {
             if (stageTrigger.id == "level_3_enter")
             {
-                foreach (var lightning in SpriteLightning.instances)
+                foreach (var lightning in spriteLightnings)
                     lightning.StartLightning();
                 stageTrigger.gameObject.SetActive(false);
             }

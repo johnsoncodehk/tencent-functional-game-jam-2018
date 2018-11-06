@@ -5,15 +5,11 @@ using UnityEngine;
 public class SpriteLightning : MonoBehaviour
 {
 
-    public static List<SpriteLightning> instances = new List<SpriteLightning>();
-
     public float delayTime;
     public float length = 2;
 
     void Awake()
     {
-        instances.Add(this);
-
         SpriteRenderer sprite = GetComponent<SpriteRenderer>();
         sprite.enabled = false;
     }
