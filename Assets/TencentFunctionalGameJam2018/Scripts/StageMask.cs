@@ -4,13 +4,9 @@ using UnityEngine;
 
 public class StageMask : MonoBehaviour
 {
-    public bool PlayLight()
+    public void PlayLight()
     {
-        var state = GetComponent<Animator>().GetCurrentAnimatorStateInfo(0);
-        if (state.IsName("Light") && state.normalizedTime < 0.3f)
-            return false;
         GetComponent<Animator>().Play("Light", 0, 0);
-        return true;
     }
     public void PlayLightFinal()
     {

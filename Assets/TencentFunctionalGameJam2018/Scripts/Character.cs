@@ -27,12 +27,15 @@ public class Character : MonoBehaviour
     public Animator lightEffectAnimator, combineEffectAnimator, thunderEffectAnimator;
     public Animator level1PoetryAnimator;
     public Animator hintY, hintX;
+    public float skill1DelayTime = 0.3f;
+    public float skill4DelayTime = 1f;
 
     /* Runtime Propertys */
     bool m_IsUseX;
     GameData m_GameData;
     List<WordGiver> m_TouchingWords = new List<WordGiver>();
     List<StageTrigger> m_EventTrigger = new List<StageTrigger>();
+    float m_LastUseSkillTime;
 
     /* Getter/Setter Propertys */
     public WordGiver touchingWordGiver
@@ -235,18 +238,21 @@ public class Character : MonoBehaviour
         {
             if (wordHolder.current.name == "日")
             {
-                GameObject ag = GameObject.FindWithTag("AudioController");
-                AudioController ac = (AudioController)ag.GetComponent(typeof(AudioController));
-                ac.PlayFx("shining");
-                m_IsUseX = true;
-                if (hintX.GetCurrentAnimatorStateInfo(0).IsName("Show"))
-                    hintX.Play("Hide");
+                if (Time.time - m_LastUseSkillTime > skill1DelayTime)
+                {
+                    m_LastUseSkillTime = Time.time;
 
-                bool success = false;
-                foreach (var stageMask in stageMasks)
-                    success |= stageMask.PlayLight();
-                if (success)
+                    GameObject ag = GameObject.FindWithTag("AudioController");
+                    AudioController ac = (AudioController)ag.GetComponent(typeof(AudioController));
+                    ac.PlayFx("shining");
+                    m_IsUseX = true;
+                    if (hintX.GetCurrentAnimatorStateInfo(0).IsName("Show"))
+                        hintX.Play("Hide");
+
+                    foreach (var stageMask in stageMasks)
+                        stageMask.PlayLight();
                     lightEffectAnimator.Play("Flash", 0, 0);
+                }
             }
             else if (wordHolder.current.name == "灭")
             {
@@ -261,11 +267,16 @@ public class Character : MonoBehaviour
             }
             else if (wordHolder.current.name == "雳")
             {
-                GameObject ag = GameObject.FindWithTag("AudioController");
-                AudioController ac = (AudioController)ag.GetComponent(typeof(AudioController));
-                ac.PlayFx("thunder");
-                RocksControl.instance.DestroyRock();
-                thunderEffectAnimator.Play("Flash", 0, 0);
+                if (Time.time - m_LastUseSkillTime > skill4DelayTime)
+                {
+                    m_LastUseSkillTime = Time.time;
+
+                    GameObject ag = GameObject.FindWithTag("AudioController");
+                    AudioController ac = (AudioController)ag.GetComponent(typeof(AudioController));
+                    ac.PlayFx("thunder");
+                    RocksControl.instance.DestroyRock();
+                    thunderEffectAnimator.Play("Flash", 0, 0);
+                }
             }
         }
         animator.SetBool("Fly", Input.GetButton("X") && wordHolder.current.name == "飞");
