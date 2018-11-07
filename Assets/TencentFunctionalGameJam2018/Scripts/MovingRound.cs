@@ -14,10 +14,6 @@ public class MovingRound : MonoBehaviour
     void Start()
     {
         rigidbody = GetComponent<Rigidbody2D>();
-
-        // Vector3 p = aroundPoint.rotation * Vector3.forward * aroundRadius;
-        // transform.position = new Vector3(p.x, aroundPoint.position.y, p.z);
-
         transform.position = aroundPoint.position;
     }
 
@@ -28,8 +24,7 @@ public class MovingRound : MonoBehaviour
         float posY = aroundRadius * Mathf.Cos(angled * Mathf.Deg2Rad);//计算y位置
 
         Vector3 targetPosition = new Vector3(posX, posY, 0) + aroundPoint.position;
-        Vector2 d = targetPosition - transform.position;
-        rigidbody.velocity = d;
+        rigidbody.MovePosition(targetPosition);
     }
 
 }
