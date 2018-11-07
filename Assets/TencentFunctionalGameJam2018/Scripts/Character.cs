@@ -29,6 +29,7 @@ public class Character : MonoBehaviour
     public Animator hintY, hintX;
     public float skill1DelayTime = 0.3f;
     public float skill4DelayTime = 1f;
+    public Cinemachine.CinemachineVirtualCamera cinemachine;
 
     /* Runtime Propertys */
     bool m_IsUseX;
@@ -36,6 +37,7 @@ public class Character : MonoBehaviour
     List<WordGiver> m_TouchingWords = new List<WordGiver>();
     List<StageTrigger> m_EventTrigger = new List<StageTrigger>();
     float m_LastUseSkillTime;
+    Cinemachine.CinemachineBasicMultiChannelPerlin perlin;
 
     /* Getter/Setter Propertys */
     public WordGiver touchingWordGiver
@@ -55,6 +57,7 @@ public class Character : MonoBehaviour
     {
         instance = this;
 
+        perlin = cinemachine.GetCinemachineComponent<Cinemachine.CinemachineBasicMultiChannelPerlin>();
         startPosition = transform.position;
         m_GameData = Resources.Load<GameData>("GameData");
         foreach (var stageMask in stageMasks)
@@ -68,6 +71,7 @@ public class Character : MonoBehaviour
         UpdateGrounded();
         UpdateState();
         UpdateSpeedY();
+        UpdateCameraShake();
     }
     void OnTriggerEnter2D(Collider2D other)
     {
@@ -276,6 +280,8 @@ public class Character : MonoBehaviour
                     ac.PlayFx("thunder");
                     RocksControl.instance.DestroyRock();
                     thunderEffectAnimator.Play("Flash", 0, 0);
+
+                    perlin.m_AmplitudeGain = 5;
                 }
             }
         }
@@ -381,5 +387,12 @@ public class Character : MonoBehaviour
     void UpdateGrounded()
     {
         animator.SetBool("Is Grounded", groundCheck.isGrounded);
+    }
+    void UpdateCameraShake()
+    {
+        if (perlin.m_AmplitudeGain > 0) {
+            perlin.m_AmplitudeGain -= Time.deltaTime * 5;
+            perlin.m_AmplitudeGain = Mathf.Max(0, perlin.m_AmplitudeGain);
+        }
     }
 }
