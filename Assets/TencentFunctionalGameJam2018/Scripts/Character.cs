@@ -325,7 +325,7 @@ public class Character : MonoBehaviour
         wordHolder.ChangeWord(startWord);
         GameObject ag = GameObject.FindWithTag("AudioController");
         AudioController ac = (AudioController)ag.GetComponent(typeof(AudioController));
-        ac.LvlDown();
+        // ac.LvlDown();
     }
     void UpdateHorizontal()
     {

@@ -19,7 +19,6 @@ public class AudioController : MonoBehaviour
     public AudioClip state7;
     public AudioClip state8;
 
-
     public AudioClip transformUp;
     public AudioClip transformDown;
     public AudioClip shining;
@@ -43,10 +42,32 @@ public class AudioController : MonoBehaviour
     private float pitchHighRange = 1.0f;
     private int interval = 188;
     private AudioClip[] lvlMusic;
+    private float targetRainVolume;
 
-    // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
+        clips = new Dictionary<string, AudioClip>{
+            { "reset", state1 },
+            { "", state2 },
+            { "日", state3 },
+            { "灭", state4 },
+            { "飞", state5 },
+            { "reset2", state6 },
+            { "雨", state7 },
+            { "雳", state8 },
+        };
+        sndFx = new Dictionary<string, AudioClip>{
+            { "transformUp", transformUp },
+            { "transformDown", transformDown },
+            { "shining", shining },
+            { "extinguish", extinguish },
+            { "bird", bird },
+            { "thunder", thunder },
+            { "rain", rain },
+            { "neon", neon },
+            { "wind", wind },
+        };
+
         sources = GetComponents<AudioSource>();
         PlayLvlAmbiance(lvl);
         PlayLvlBGM(lvl);
@@ -78,17 +99,26 @@ public class AudioController : MonoBehaviour
                 }
             }
         }
+
+        float FadeTime = 2.0f;
+        if (sources[4].volume < targetRainVolume)
+        {
+            sources[4].volume += rainVolume * Time.deltaTime / FadeTime;
+            sources[4].volume = Mathf.Min(targetRainVolume, sources[4].volume);
+        }
+        else if (sources[4].volume > targetRainVolume)
+        {
+            sources[4].volume -= rainVolume * Time.deltaTime / FadeTime;
+            sources[4].volume = Mathf.Max(0, sources[4].volume);
+        }
     }
 
-    // Update is called once per frame
     void PlaySoundRnd(AudioClip sound)
     {
         float vol = Random.Range(volLowRange, volHighRange);
         sources[1].pitch = Random.Range(pitchLowRange, pitchHighRange);
         sources[1].PlayOneShot(sound, vol);
     }
-
-    //
     void PlayLvlBGM(int bgmLvl)
     {
         //if (bgmLvl == 1)
@@ -103,15 +133,9 @@ public class AudioController : MonoBehaviour
         //{
         //    lvlMusic = new AudioClip[] { state1, state2, state3, state4 };
         //}
-        clips = new Dictionary<string, AudioClip>{ { "reset",state1 },
-            {"",state2}, {"日", state3 }, {"灭", state4 }, { "飞", state5 }, {"reset2",state6}, { "雨", state7 }, { "雳", state8 } };
-        sndFx = new Dictionary<string, AudioClip>{ { "transformUp",transformUp },
-            {"transformDown",transformDown}, {"shining", shining }, {"extinguish", extinguish }, { "bird", bird }, {"thunder",thunder}, { "rain", rain }, { "neon", neon },{ "wind", wind } };
         sources[2].clip = clips["reset"];
         sources[2].Play();
     }
-
-    //
     void PlayLvlAmbiance(int ambLvl)
     {
         if (ambLvl == 1)
@@ -121,102 +145,92 @@ public class AudioController : MonoBehaviour
         }
         else
         {
-
             sources[0].Stop();
         }
     }
-    public void PutOutFire(){
+    public void PutOutFire()
+    {
         lvl = 2;
         PlayFx("extinguish");
         PlayLvlAmbiance(2);
     }
-    //
     public void LvlUp(string lvlId)
     {
-            lvlState = 1;
-            sources[3].PlayOneShot(transformUp);
-            float FadeTime = 1.0f;
-            float startVolume = sources[2].volume;
-            while (sources[2].volume > 0)
-            {
-                sources[2].volume -= startVolume * Time.deltaTime / FadeTime;
-
-                //yield return null;
-            }
-            sources[2].Stop();
-            if (clips.ContainsKey(lvlId))
-            {
-                sources[2].clip = clips[lvlId];
-            }
-            sources[2].Play();
-            while (sources[2].volume < startVolume)
-            {
-                sources[2].volume += startVolume * Time.deltaTime / FadeTime;
-                //yield return null;
-            }
+        StartCoroutine(LvlUpCoroutine(lvlId));
     }
-
-    //
-    public void LvlDown()
+    public IEnumerator LvlUpCoroutine(string lvlId)
     {
+        lvlState = 1;
+        sources[3].PlayOneShot(transformUp);
 
-        if (lvlState > 0)
+        float FadeTime = 1.0f;
+
+        AudioSource oldSource = sources[2];
+        AudioSource newSource = gameObject.AddComponent<AudioSource>();
+        sources[2] = newSource;
+        newSource.loop = oldSource.loop;
+        newSource.playOnAwake = oldSource.playOnAwake;
+        newSource.volume = 0;
+        newSource.clip = clips[lvlId];
+        newSource.time = oldSource.time;
+        newSource.Play();
+
+        while (newSource.volume < 1)
         {
-            sources[3].PlayOneShot(transformDown);
-            lvlState = 0;
-            float FadeTime = 1.0f;
-            float startVolume = sources[2].volume;
+            newSource.volume += Time.deltaTime / FadeTime;
+            newSource.volume = Mathf.Min(1, newSource.volume);
+            oldSource.volume = 1 - newSource.volume;
 
-            while (sources[2].volume > 0)
-            {
-                sources[2].volume -= startVolume * Time.deltaTime / FadeTime;
-                //yield return null;
-            }
-            sources[2].Stop();
-            if(lvl == 1){
-                sources[2].clip = clips["reset"];
-
-            }else{
-                //sources[2].clip = clips["reset2"];
-
-            }
-            sources[2].Play();
-            while (sources[2].volume < startVolume)
-            {
-                sources[2].volume += startVolume * Time.deltaTime / FadeTime;
-                //yield return null;
-            }
+            yield return new WaitForEndOfFrame();
         }
+
+        Destroy(oldSource);
     }
+
+    // public void LvlDown()
+    // {
+
+    //     if (lvlState > 0)
+    //     {
+    //         sources[3].PlayOneShot(transformDown);
+    //         lvlState = 0;
+    //         float FadeTime = 1.0f;
+    //         float startVolume = sources[2].volume;
+
+    //         while (sources[2].volume > 0)
+    //         {
+    //             sources[2].volume -= startVolume * Time.deltaTime / FadeTime;
+    //             //yield return null;
+    //         }
+    //         sources[2].Stop();
+    //         if(lvl == 1){
+    //             sources[2].clip = clips["reset"];
+
+    //         }else{
+    //             //sources[2].clip = clips["reset2"];
+
+    //         }
+    //         sources[2].Play();
+    //         while (sources[2].volume < startVolume)
+    //         {
+    //             sources[2].volume += startVolume * Time.deltaTime / FadeTime;
+    //             //yield return null;
+    //         }
+    //     }
+    // }
 
     public void PlayFx(string soundFx)
     {
-        //if (!sources[3].isPlaying)
-        //{
-            sources[3].PlayOneShot(sndFx[soundFx]);
-        //}
-
+        sources[3].PlayOneShot(sndFx[soundFx]);
     }
 
-    public void PlayRain(){
-            float FadeTime = 2.0f;
-            float startVolume = rainVolume;
-            while (sources[4].volume < startVolume)
-            {
-                sources[4].volume += startVolume * Time.deltaTime / FadeTime;
-                //yield return null;
-            }
+    public void PlayRain()
+    {
+        targetRainVolume = rainVolume;
     }
 
     public void StopRain()
     {
-        float FadeTime = 2.0f;
-        float startVolume = sources[4].volume;
-        while (sources[4].volume > 0)
-        {
-            sources[4].volume -= startVolume * Time.deltaTime / FadeTime;
-            //yield return null;
-        }
-
+        targetRainVolume = 0;
     }
 }
