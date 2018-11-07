@@ -970,10 +970,16 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
+  spriteLightnings: []
   startPosition: {x: 0, y: 0}
   lightEffectAnimator: {fileID: 6538371978093473144}
   combineEffectAnimator: {fileID: 8861213852587597030}
   thunderEffectAnimator: {fileID: 3752369367045149301}
+  level1PoetryAnimator: {fileID: 0}
+  hintY: {fileID: 0}
+  hintX: {fileID: 0}
+  skill1DelayTime: 2.3
+  skill4DelayTime: 1.2
 --- !u!95 &2336453218167573242
 Animator:
   serializedVersion: 3
@@ -1111,7 +1117,7 @@ HingeJoint2D:
   m_BreakTorque: Infinity
   m_AutoConfigureConnectedAnchor: 1
   m_Anchor: {x: 0, y: 0}
-  m_ConnectedAnchor: {x: 0, y: 0.25999987}
+  m_ConnectedAnchor: {x: 0, y: 0.26}
   m_UseMotor: 0
   m_Motor:
     m_MotorSpeed: 0
