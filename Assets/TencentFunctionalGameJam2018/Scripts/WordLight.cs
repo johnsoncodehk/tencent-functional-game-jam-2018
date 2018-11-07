@@ -16,8 +16,10 @@ public class WordLight : MonoBehaviour
         {
             GetComponent<SpriteRenderer>().enabled = false;
 
+            float targetA = 0;
+            float a = Mathf.SmoothDamp(lightSprites[0].color.a, targetA, ref v, 0.1f);
             foreach (var light in lightSprites)
-                light.color = new Color(1, 1, 1, 0);
+                light.color = new Color(1, 1, 1, a);
         }
         else
         {
