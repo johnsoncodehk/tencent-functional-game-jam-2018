@@ -16,10 +16,10 @@ public class WordHolder : MonoBehaviour
     Word m_WordToChange;
 
     /* Unity Events */
-    void Awake()
+    void Start()
     {
         startParent = transform.parent;
-        transform.SetParent(null);
+        transform.SetParent(Character.instance.transform.parent);
     }
     void Update()
     {
