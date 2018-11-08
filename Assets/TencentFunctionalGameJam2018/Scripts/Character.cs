@@ -328,10 +328,13 @@ public class Character : MonoBehaviour
     }
     void ResetWord()
     {
+        if (wordHolder.current && wordHolder.current.name != startWord.name)
+        {
+            GameObject ag = GameObject.FindWithTag("AudioController");
+            AudioController ac = (AudioController)ag.GetComponent(typeof(AudioController));
+            ac.LvlDown();
+        }
         wordHolder.ChangeWord(startWord);
-        GameObject ag = GameObject.FindWithTag("AudioController");
-        AudioController ac = (AudioController)ag.GetComponent(typeof(AudioController));
-        // ac.LvlDown();
     }
     void UpdateHorizontal()
     {
@@ -390,7 +393,8 @@ public class Character : MonoBehaviour
     }
     void UpdateCameraShake()
     {
-        if (perlin.m_AmplitudeGain > 0) {
+        if (perlin.m_AmplitudeGain > 0)
+        {
             perlin.m_AmplitudeGain -= Time.deltaTime * 5;
             perlin.m_AmplitudeGain = Mathf.Max(0, perlin.m_AmplitudeGain);
         }

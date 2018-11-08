@@ -187,37 +187,33 @@ public class AudioController : MonoBehaviour
         Destroy(oldSource);
     }
 
-    // public void LvlDown()
-    // {
+    public void LvlDown()
+    {
+        sources[3].PlayOneShot(transformDown);
+        // lvlState = 0;
+        // float FadeTime = 1.0f;
+        // float startVolume = sources[2].volume;
 
-    //     if (lvlState > 0)
-    //     {
-    //         sources[3].PlayOneShot(transformDown);
-    //         lvlState = 0;
-    //         float FadeTime = 1.0f;
-    //         float startVolume = sources[2].volume;
+        // while (sources[2].volume > 0)
+        // {
+        //     sources[2].volume -= startVolume * Time.deltaTime / FadeTime;
+        //     //yield return null;
+        // }
+        // sources[2].Stop();
+        // if(lvl == 1){
+        //     sources[2].clip = clips["reset"];
 
-    //         while (sources[2].volume > 0)
-    //         {
-    //             sources[2].volume -= startVolume * Time.deltaTime / FadeTime;
-    //             //yield return null;
-    //         }
-    //         sources[2].Stop();
-    //         if(lvl == 1){
-    //             sources[2].clip = clips["reset"];
+        // }else{
+        //     //sources[2].clip = clips["reset2"];
 
-    //         }else{
-    //             //sources[2].clip = clips["reset2"];
-
-    //         }
-    //         sources[2].Play();
-    //         while (sources[2].volume < startVolume)
-    //         {
-    //             sources[2].volume += startVolume * Time.deltaTime / FadeTime;
-    //             //yield return null;
-    //         }
-    //     }
-    // }
+        // }
+        // sources[2].Play();
+        // while (sources[2].volume < startVolume)
+        // {
+        //     sources[2].volume += startVolume * Time.deltaTime / FadeTime;
+        //     //yield return null;
+        // }
+    }
 
     public void PlayFx(string soundFx)
     {
