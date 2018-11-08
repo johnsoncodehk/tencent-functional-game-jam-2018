@@ -7,6 +7,7 @@ public class SpriteLightning : MonoBehaviour
 
     public float delayTime;
     public float length = 2;
+    public bool isDragon;
 
     void Awake()
     {
@@ -23,6 +24,12 @@ public class SpriteLightning : MonoBehaviour
         SpriteRenderer sprite = GetComponent<SpriteRenderer>();
 
         yield return new WaitForSeconds(delayTime);
+
+        if (isDragon) {
+            GameObject ag = GameObject.FindWithTag("AudioController");
+            AudioController ac = (AudioController)ag.GetComponent(typeof(AudioController));
+            ac.PlayFx("dragon");
+        }
 
         float startTime = Time.time;
         while (Time.time - startTime < length)

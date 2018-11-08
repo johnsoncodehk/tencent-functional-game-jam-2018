@@ -28,6 +28,7 @@ public class AudioController : MonoBehaviour
     public AudioClip rain;
     public AudioClip wind;
     public AudioClip neon;
+    public AudioClip dragon;
 
     public int lvl = 1;
     public int lvlState = 0;
@@ -66,6 +67,7 @@ public class AudioController : MonoBehaviour
             { "rain", rain },
             { "neon", neon },
             { "wind", wind },
+            { "dragon", dragon },
         };
 
         sources = GetComponents<AudioSource>();

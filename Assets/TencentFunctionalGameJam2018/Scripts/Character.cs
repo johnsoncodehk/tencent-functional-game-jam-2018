@@ -9,6 +9,7 @@ public class Character : MonoBehaviour
     public static Character instance;
 
     /* Config Propertys */
+    public GameObject spriteMeshes;
     public Animator animator;
     new public Rigidbody2D rigidbody;
     public HingeJoint2D footHingeJoint;
@@ -24,7 +25,7 @@ public class Character : MonoBehaviour
     public StageMask[] finalStageMasks;
     public SpriteLightning[] spriteLightnings;
     public Vector2 startPosition;
-    public Animator lightEffectAnimator, combineEffectAnimator, thunderEffectAnimator;
+    public Animator lightEffectAnimator, combineEffectAnimator, thunderEffectAnimator, deadEffectAnimator;
     public Animator level1PoetryAnimator;
     public Animator hintY, hintX;
     public float skill1DelayTime = 0.3f;
@@ -112,8 +113,10 @@ public class Character : MonoBehaviour
         }
 
         DeadArea deadArea = other.GetComponent<DeadArea>();
-        if (deadArea)
+        if (deadArea) {
             CheckGameOver.instance.GameOver();
+            deadEffectAnimator.Play("Flash", 0, 0);
+        }
 
         Wind wind = other.GetComponent<Wind>();
         if (wind)

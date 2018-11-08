@@ -8,7 +8,7 @@ public class CheckGameOver : MonoBehaviour
     public static CheckGameOver instance;
 
     public GameObject characterDeadEffect;
-    public bool isGameOver, isGameFinish;
+    public bool isGameOver;
 
     void Awake()
     {
@@ -31,19 +31,18 @@ public class CheckGameOver : MonoBehaviour
             Character.instance.enabled = true;
             Character.instance.rigidbody.bodyType = RigidbodyType2D.Dynamic;
             Character.instance.animator.speed = 1;
+            Character.instance.spriteMeshes.SetActive(true);
             // Character.instance.transform.localEulerAngles = new Vector3(0, 0, 0);
             // Character.instance.transform.localScale = Vector3.one;
             Character.instance.Restart();
 
             isGameOver = false;
         }
-        if (isGameFinish)
-        {
-            GameStart.gameFinish = true;
-            UnityEngine.SceneManagement.SceneManager.LoadScene("GameStart");
-
-            isGameFinish = false;
-        }
+    }
+    void OnFinish()
+    {
+        GameStart.gameFinish = true;
+        UnityEngine.SceneManagement.SceneManager.LoadScene("GameStart");
     }
 
     public void GameOver()
@@ -51,6 +50,7 @@ public class CheckGameOver : MonoBehaviour
         Character.instance.enabled = false;
         Character.instance.rigidbody.bodyType = RigidbodyType2D.Static;
         Character.instance.animator.speed = 0;
+        Character.instance.spriteMeshes.SetActive(false);
         // Character.instance.transform.localEulerAngles = new Vector3(0, 0, 90);
         // Character.instance.transform.localScale = Vector3.zero;
 
@@ -61,9 +61,8 @@ public class CheckGameOver : MonoBehaviour
     }
     public void GameFinish()
     {
-        isGameFinish = true;
         transform.parent.SetParent(null);
-        GetComponent<Animator>().Play("Show");
+        GetComponent<Animator>().Play("Finish");
     }
 
     IEnumerator ShowEffect()

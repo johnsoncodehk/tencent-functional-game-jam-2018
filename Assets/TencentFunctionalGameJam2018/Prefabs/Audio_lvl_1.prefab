@@ -553,5 +553,7 @@ MonoBehaviour:
   rain: {fileID: 8300000, guid: d71ac0fbbcf1d4db4b2af89cbba3dad9, type: 3}
   wind: {fileID: 8300000, guid: bead8ac8801f44d83b78e2e08e3e4839, type: 3}
   neon: {fileID: 8300000, guid: 89d3ae4f6f3434002b7075e70fe2b8d7, type: 3}
+  dragon: {fileID: 8300000, guid: a7bcd8f611abb4456b2bb16ace40c475, type: 3}
   lvl: 1
   lvlState: 0
+  rainVolume: 0.2
