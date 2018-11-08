@@ -29,22 +29,22 @@ MonoBehaviour:
   active: 1
   enabled:
     overrideState: 1
-    value: 1
+    value: 0
   intensity:
     overrideState: 1
-    value: 1.27
+    value: 0.5
   threshold:
     overrideState: 1
-    value: 0.53
+    value: 0.3
   softKnee:
     overrideState: 1
-    value: 0.5
+    value: 0.6
   clamp:
     overrideState: 0
     value: 65472
   diffusion:
     overrideState: 0
-    value: 7
+    value: 10
   anamorphicRatio:
     overrideState: 0
     value: 0
