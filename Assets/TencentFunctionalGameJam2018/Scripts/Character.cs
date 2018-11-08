@@ -113,10 +113,8 @@ public class Character : MonoBehaviour
         }
 
         DeadArea deadArea = other.GetComponent<DeadArea>();
-        if (deadArea) {
+        if (deadArea)
             CheckGameOver.instance.GameOver();
-            deadEffectAnimator.Play("Flash", 0, 0);
-        }
 
         Wind wind = other.GetComponent<Wind>();
         if (wind)

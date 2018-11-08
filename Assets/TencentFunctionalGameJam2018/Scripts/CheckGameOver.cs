@@ -51,6 +51,7 @@ public class CheckGameOver : MonoBehaviour
         Character.instance.rigidbody.bodyType = RigidbodyType2D.Static;
         Character.instance.animator.speed = 0;
         Character.instance.spriteMeshes.SetActive(false);
+        Character.instance.deadEffectAnimator.Play("Flash", 0, 0);
         // Character.instance.transform.localEulerAngles = new Vector3(0, 0, 90);
         // Character.instance.transform.localScale = Vector3.zero;
 
