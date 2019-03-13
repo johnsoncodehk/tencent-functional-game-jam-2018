@@ -1,0 +1,13 @@
+{
+"companyName": "DefaultCompany",
+"productName": "Tencent Functional Game Jam 2018",
+"dataUrl": "2c92bcb9bd5a742a5504aa5e9b790926.unityweb",
+"wasmCodeUrl": "3052eb1968a1be2474d011ff21935de2.unityweb",
+"wasmFrameworkUrl": "3f1dd22a04204561248de66361f94d6a.unityweb",
+"TOTAL_MEMORY": 268435456,
+"graphicsAPI": ["WebGL 2.0", "WebGL 1.0"],
+"webglContextAttributes": {"preserveDrawingBuffer": false},
+"splashScreenStyle": "Dark",
+"backgroundColor": "#231F20",
+"cacheControl": {"default": "must-revalidate"}
+}
